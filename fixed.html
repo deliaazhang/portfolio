@@ -145,6 +145,63 @@
     margin-left: auto;
   }
 
+  
+  .apple-folder {
+    width: 96px;
+    height: 72px;
+    border-radius: 18px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,.65),
+      0 12px 22px rgba(120, 50, 70, .16);
+    transition: transform .18s ease;
+  }
+
+  .apple-folder::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    width: 38px;
+    height: 18px;
+    border-radius: 12px 12px 0 0;
+    background: inherit;
+    filter: brightness(1.06);
+  }
+
+  .desk-icon:hover .apple-folder {
+    transform: translateY(-4px) scale(1.04);
+  }
+
+  .pink-folder {
+    background: linear-gradient(180deg, #ffbfd7 0%, #f89cbc 100%);
+  }
+
+  .blue-folder {
+    background: linear-gradient(180deg, #b8d8ff 0%, #8db8ff 100%);
+  }
+
+  .yellow-folder {
+    background: linear-gradient(180deg, #ffe8b0 0%, #ffd67a 100%);
+  }
+
+  .purple-folder {
+    background: linear-gradient(180deg, #d8c0ff 0%, #b998ff 100%);
+  }
+
+  .orange-folder {
+    background: linear-gradient(180deg, #ffd0b0 0%, #ffae72 100%);
+  }
+
+  .green-folder {
+    background: linear-gradient(180deg, #c9f0d2 0%, #8dd8a1 100%);
+  }
+
+
   .desk-icon {
     width: 132px;
     min-height: 156px;
@@ -432,37 +489,41 @@
     </section>
 
     
+
 <section class="icon-grid" style="grid-template-columns: repeat(3, minmax(120px,1fr)); max-width:560px; gap:28px 34px;">
+
   <div class="desk-icon" onclick="openSection('careerFolder')">
-    <img src="" alt="">
+    <div class="apple-folder pink-folder">💼</div>
     <span>Career</span>
   </div>
 
   <div class="desk-icon" onclick="openSection('educationFolder')">
-    <img src="" alt="">
+    <div class="apple-folder blue-folder">🎓</div>
     <span>Education</span>
   </div>
 
   <div class="desk-icon" onclick="openSection('aboutFolder')">
-    <img src="" alt="">
+    <div class="apple-folder yellow-folder">💌</div>
     <span>About Me</span>
   </div>
 
   <div class="desk-icon" onclick="openSection('projects')">
-    <img src="" alt="">
+    <div class="apple-folder purple-folder">✨</div>
     <span>Projects</span>
   </div>
 
   <div class="desk-icon" onclick="openSection('skills')">
-    <img src="" alt="">
+    <div class="apple-folder orange-folder">⭐</div>
     <span>Skills</span>
   </div>
 
   <div class="desk-icon" onclick="openSection('contact')">
-    <img src="" alt="">
+    <div class="apple-folder green-folder">📞</div>
     <span>Contact</span>
   </div>
+
 </section>
+
 
   </main>
 
