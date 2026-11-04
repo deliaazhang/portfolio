@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import type { Project } from '../data/projects'
+import { ScatterMorph } from './ScatterMorph'
 
 /* ── device frames ─────────────────────────────────────── */
 
@@ -152,6 +153,8 @@ export function ProjectPreview({
 }) {
   const { preview, title } = project
   const hero = size === 'hero'
+
+  if (preview.device === 'viz') return <ScatterMorph playing={playing} hero={hero} />
 
   if (preview.device === 'laptop') {
     return (

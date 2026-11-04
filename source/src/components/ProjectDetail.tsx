@@ -8,6 +8,9 @@ import { ArcTrailMatch } from './prototypes/ArcTrailMatch'
 import { RoominateAlerts } from './prototypes/RoominateAlerts'
 import { SkintellectFlow } from './prototypes/SkintellectFlow'
 import { HerschelExplorer } from './prototypes/HerschelExplorer'
+import { WeHappyCheckin } from './prototypes/WeHappyCheckin'
+import { CorrelationTask } from './prototypes/CorrelationTask'
+import { JndChart } from './JndChart'
 
 const ease = [0.2, 0.7, 0.2, 1] as const
 
@@ -16,6 +19,8 @@ const PROTOTYPES: Record<PrototypeKey, () => ReactNode> = {
   roominate: () => <RoominateAlerts />,
   skintellect: () => <SkintellectFlow />,
   herschel: () => <HerschelExplorer />,
+  wehappy: () => <WeHappyCheckin />,
+  vcl: () => <CorrelationTask />,
 }
 
 const SECTIONS = [
@@ -232,13 +237,13 @@ export function ProjectDetail({ slug, onBack, onOpen }: { slug: string; onBack: 
           {/* where it started */}
           <Section id="origin" label="where it started" accent={p.accent}>
             <Reveal>
-              <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_260px] md:items-start">
+              <div className={`grid gap-8 md:items-start ${p.hero ? 'md:grid-cols-[minmax(0,1fr)_260px]' : ''}`}>
                 <div className="space-y-4 text-[1.08rem] leading-relaxed text-ink-soft">
                   {s.origin.map((t) => (
                     <p key={t}>{t}</p>
                   ))}
                 </div>
-                <img src={p.hero} alt={`${p.title} main screen`} className="hidden w-full rounded-[16px] md:block" loading="lazy" />
+                {p.hero && <img src={p.hero} alt={`${p.title} main screen`} className="hidden w-full rounded-[16px] md:block" loading="lazy" />}
               </div>
               <blockquote className="relative mt-10 border-l-2 pl-6" style={{ borderColor: p.accent }}>
                 <p className="font-mono text-[0.64rem] uppercase tracking-[0.16em] text-ink-faint">so we asked</p>
@@ -318,7 +323,7 @@ export function ProjectDetail({ slug, onBack, onOpen }: { slug: string; onBack: 
             </div>
             <Reveal>{PROTOTYPES[p.prototype.key]()}</Reveal>
             <p className="mt-4 flex flex-wrap items-center justify-between gap-3 font-mono text-[0.68rem] text-ink-faint">
-              <span>rebuilt in code from my Figma designs · demo data</span>
+              <span>{p.prototype.key === 'vcl' ? 'an interactive demo of the experiment’s JND task' : 'rebuilt in code from my Figma designs · demo data'}</span>
               {p.links[0] && (
                 <a href={p.links[0].href} target="_blank" rel="noreferrer" className="link-draw text-ink-soft hover:text-ink">
                   open the original Figma prototype ↗
@@ -330,8 +335,12 @@ export function ProjectDetail({ slug, onBack, onOpen }: { slug: string; onBack: 
           {/* final product */}
           <Section id="final" label="final product" accent={p.accent}>
             <Reveal>
-              <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-                <img src={p.feature.image} alt={`${p.feature.name} feature screens`} className="w-full rounded-[18px] bg-paper-2" loading="lazy" />
+              <div className={`grid items-center gap-8 ${p.feature.chart ? '' : 'md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]'}`}>
+                {p.feature.chart === 'jnd' ? (
+                  <JndChart />
+                ) : (
+                  p.feature.image && <img src={p.feature.image} alt={`${p.feature.name} feature screens`} className="w-full rounded-[18px] bg-paper-2" loading="lazy" />
+                )}
                 <div>
                   <h3 className="serif-i text-[2.2rem] leading-none text-ink">{p.feature.name}</h3>
                   <p className="mt-4 text-[1.02rem] leading-relaxed text-ink-soft">{p.feature.body}</p>

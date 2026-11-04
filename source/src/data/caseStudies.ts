@@ -27,6 +27,91 @@ export type Story = {
 }
 
 export const stories: Record<string, Story> = {
+  wehappy: {
+    tags: ['product design', 'internship', 'community', 'web design'],
+    tldr: [
+      'WeHappy is a bilingual social and lifestyle app for Chinese communities around the world. During my internship at HappyVV I worked across three pieces: a community feature, a city check-in (打卡) website, and a website redesign for Western audiences.',
+      'I analyzed how Discord organizes communities so the team could design WeHappy’s own version. That feature is now in the live app.',
+    ],
+    origin: [
+      'WeHappy already had messaging, group chats and a feed, but a single group chat can only hold so much. Interest-based communities needed more structure: separate spaces, roles and events.',
+      'Discord does this well, so before designing anything we needed to understand exactly how it works, from long-press menus to member roles and search.',
+    ],
+    questions: [
+      'How does Discord keep large communities organized?',
+      'Which of those patterns actually suit WeHappy’s users?',
+      'How do we explain WeHappy to someone who has never heard of it?',
+    ],
+    decisions: [
+      {
+        question: 'Design straight away, or study Discord first?',
+        choice: 'Map every Discord flow first, in one Figma board.',
+        why: 'Messages, images, links, PDFs, apps, member profiles, events and search each behave differently. A shared map gave designers and engineers the same reference before anyone built anything.',
+      },
+      {
+        question: 'Copy Discord, or adapt it?',
+        choice: 'Adapt the patterns that fit WeHappy’s communities.',
+        why: 'WeHappy’s users and content are different, so the goal was to borrow structure, not to clone another product.',
+      },
+      {
+        question: 'What should the Western website lead with?',
+        choice: 'What the app does, in plain English, styled like chat bubbles.',
+        why: 'New visitors need to understand the product in seconds. Echoing the app’s own messages shows the experience instead of just describing it.',
+      },
+      {
+        question: 'How do we get people exploring their city?',
+        choice: 'A 打卡 site with check-in progress for each city.',
+        why: 'Seeing “3/10 checked in” turns exploring into a small goal and gives people a reason to come back.',
+      },
+    ],
+    reflections: [
+      'Seeing analysis I did turn into a feature in a real app, used by real people, was the highlight of my internship.',
+      'Designing for two languages and two audiences taught me to check every assumption about what is “obvious”.',
+    ],
+  },
+
+  correlation: {
+    tags: ['research', 'data visualization', 'HCI', 'psychophysics'],
+    tldr: [
+      'At UBC’s Visual Cognition Lab I worked on the Correlation Project, which studies how people perceive correlation in scatterplots.',
+      'My condition tested whether point opacity changes how precisely people can judge correlation. I helped run participants, followed a counterbalanced design, and summarized the results.',
+    ],
+    origin: [
+      'Scatterplots are one of the most common charts, and we often assume people read them accurately. Research shows our sense of correlation is predictable but not perfect: it follows patterns similar to Weber’s law.',
+      'Designers change how points look all the time, for example making them transparent so overlapping dots stay visible. The question is whether that design choice quietly changes what people see.',
+    ],
+    questions: [
+      'Do more transparent dots make correlation harder to see?',
+      'Is the effect the same at low and high correlations?',
+      'How do we stop the order of conditions from biasing the results?',
+    ],
+    decisions: [
+      {
+        question: 'How do we measure “seeing correlation”?',
+        choice: 'Two tasks: estimation (Stevens) and discrimination (JND).',
+        why: 'Estimation tells us how accurate people are; discrimination tells us how small a difference they can notice. Together they separate accuracy from precision.',
+      },
+      {
+        question: 'How do we avoid order effects?',
+        choice: 'Counterbalance by rotating the starting condition: a→e, then b→a, and so on.',
+        why: 'People tend to do worst on their first condition and best on their last. Rotating the order stops any one condition from always getting the worst data.',
+      },
+      {
+        question: 'How many participants?',
+        choice: 'At least 40 per condition, running 45–50.',
+        why: 'Running a few extra leaves room to exclude participants without losing statistical power.',
+      },
+      {
+        question: 'How do we know the experiment works before real participants?',
+        choice: 'Pilot it on myself, then a friend, with the project lead observing.',
+        why: 'Dry runs catch confusing instructions and bugs before they cost real data.',
+      },
+    ],
+    reflections: [
+      'Small design choices like point opacity can be tested rigorously instead of guessed at.',
+      'Research rewards patience and care: most of the work is making sure the data can be trusted.',
+    ],
+  },
   arctrail: {
     tags: ['UX/UI design', 'community', 'web app', 'branding'],
     tldr: [

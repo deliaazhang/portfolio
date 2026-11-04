@@ -108,4 +108,12 @@ export const designs: Design[] = [
     images: ['designs/wids-alumnight-1.webp', 'designs/wids-alumnight-2.webp'],
     alt: 'WiDS@UBC Alumnight carousel: gloved hands holding a glowing folder, then a mentor slide with four polaroid profiles paper-clipped to a file folder',
   },
+  {
+    id: 'wids-stickers',
+    title: 'WiDS Stickers',
+    org: 'WiDS@UBC',
+    kind: 'sticker set',
+    images: ['designs/wids-stickers.webp'],
+    alt: 'Six hand-drawn WiDS@UBC stickers: a curly-haired character with books, at a whiteboard and on a laptop, a heart lollipop, an iced matcha and a coffee cup, each with the WiDS seal',
+  },
 ]

@@ -4,14 +4,14 @@
  */
 export type Step = { title: string; points: string[] }
 
-export type PrototypeKey = 'arctrail' | 'roominate' | 'skintellect' | 'herschel'
+export type PrototypeKey = 'arctrail' | 'roominate' | 'skintellect' | 'herschel' | 'wehappy' | 'vcl'
 
 export type Project = {
   slug: string
   /** soft brand-tinted background for previews */
   tint: string
   /** the moving preview on hover + case-study hero */
-  preview: { device: 'laptop' | 'phones'; screens: string[]; extras?: string[] }
+  preview: { device: 'laptop' | 'phones' | 'viz'; screens: string[]; extras?: string[] }
   /** the hands-on prototype shown on the case study */
   prototype: { key: PrototypeKey; title: string; hint: string }
   title: string
@@ -23,14 +23,15 @@ export type Project = {
   /** a short paragraph at the top of the case study */
   overview: string
   thumb: string
-  hero: string
+  /** image beside "where it started" (optional) */
+  hero?: string
   accent: string
   facts: { label: string; value: string }[]
   challenge: string
   goals: string[]
   achieved: string[]
   process: { image: string; steps: Step[] }
-  feature: { name: string; body: string; image: string }
+  feature: { name: string; body: string; image?: string; chart?: 'jnd' }
   gallery: { image: string; caption: string; tall?: boolean }[]
   links: { label: string; href: string }[]
 }
@@ -38,6 +39,108 @@ export type Project = {
 const img = (slug: string, part: string) => `projects/${slug}-${part}.webp`
 
 export const projects: Project[] = [
+  {
+    slug: 'wehappy',
+    tint: 'linear-gradient(160deg,#fde4e7 0%,#f8c3cb 55%,#f29aa8 100%)',
+    preview: { device: 'phones', screens: ['screens/wh-3.webp', 'screens/wh-5.webp', 'screens/wh-4.webp', 'screens/wh-6.webp', 'screens/wh-1.webp', 'screens/wh-2.webp'] },
+    prototype: { key: 'wehappy', title: 'go on a 打卡 trip', hint: 'pick a city and check in at a few spots, like the city check-in site i designed' },
+    title: 'WeHappy',
+    category: 'Product Design · Internship',
+    year: '2025',
+    event: 'HappyVV · Product & Community Intern',
+    description: 'Community features, a city check-in site and a Western-facing website for a global social app.',
+    overview:
+      'WeHappy is a bilingual social and lifestyle app for Chinese communities around the world. As a product and community intern I analyzed Discord to shape WeHappy’s own community feature (now in the live app), designed a city check-in (打卡) website, and redesigned the website for Western audiences.',
+    thumb: 'screens/wh-3.webp',
+    hero: 'screens/wh-4.webp',
+    accent: '#e8344e',
+    facts: [
+      { label: 'built at', value: 'HappyVV (WeHappy)' },
+      { label: 'worked as', value: 'Product & Community Intern' },
+      { label: 'tools', value: 'Figma' },
+      { label: 'learned', value: 'Shipping with an engineering team, bilingual design' },
+      { label: 'when', value: 'June 2025 – June 2026' },
+      { label: 'award', value: 'Community feature shipped in the live app' },
+    ],
+    challenge: 'How might we help WeHappy users build real communities, and help people outside the Chinese diaspora understand what WeHappy is?',
+    goals: [
+      'Give interest-based communities more structure than a single group chat',
+      'Introduce WeHappy clearly to Western audiences',
+      'Encourage people to explore their city through the app',
+    ],
+    achieved: [
+      'Mapped Discord’s flows end to end so the team could design WeHappy’s own version, which shipped in the app',
+      'Redesigned the website around what the app does, in plain English',
+      'Designed a city check-in (打卡) website with progress for each city',
+    ],
+    process: {
+      image: '',
+      steps: [
+        { title: 'research', points: ['Analyzed how Discord organizes communities', 'Documented flows for messages, images, links, files, members, events and search'] },
+        { title: 'define', points: ['Chose which patterns fit WeHappy’s users', 'Identified what Western visitors need to know first'] },
+        { title: 'ideate', points: ['Sketched channel, member and event flows', 'Explored a city check-in concept'] },
+        { title: 'prototype', points: ['Designed the screens and websites in Figma', 'Handed off to engineering for the live app'] },
+      ],
+    },
+    feature: {
+      name: 'Community analysis',
+      body: 'A full map of how Discord handles messages, images, links, PDFs, apps, member profiles, events and search. It became the reference for WeHappy’s own community feature, which is now in the live app.',
+      image: 'projects/wehappy-discord-map.webp',
+    },
+    gallery: [
+      { image: 'screens/ws-1.webp', caption: 'website for Western audiences' },
+      { image: 'screens/ck-1.webp', caption: '打卡 · choose a city' },
+      { image: 'screens/ck-3.webp', caption: '打卡 · spot details' },
+    ],
+    links: [],
+  },
+  {
+    slug: 'correlation',
+    tint: 'linear-gradient(160deg,#e9eef8 0%,#d3def0 55%,#b9cbe6 100%)',
+    preview: { device: 'viz', screens: [] },
+    prototype: { key: 'vcl', title: 'try the task yourself', hint: 'pick the plot that looks more correlated. it gets harder as you get better' },
+    title: 'Seeing Correlation',
+    category: 'Data Visualization Research',
+    year: '2025',
+    event: 'UBC Visual Cognition Lab · Co-Pilot',
+    description: 'How precisely can people see correlation in a scatterplot, and does the look of the dots change that?',
+    overview:
+      'At UBC’s Visual Cognition Lab I worked on the Correlation Project, which studies how people perceive correlation in scatterplots. My condition looked at point opacity: whether making the dots more or less transparent changes how precisely people can judge correlation.',
+    accent: '#2a78d6',
+    thumb: '',
+    facts: [
+      { label: 'built at', value: 'UBC Visual Cognition Lab' },
+      { label: 'worked as', value: 'Research Co-Pilot' },
+      { label: 'tools', value: 'VCL Web Framework, Git, Python' },
+      { label: 'learned', value: 'Experiment design, psychophysics' },
+      { label: 'when', value: 'April 2025 – September 2025' },
+    ],
+    challenge: 'Does the opacity of the points in a scatterplot change how precisely people perceive correlation?',
+    goals: [
+      'Measure precision (JND) and accuracy (estimation) for each opacity level',
+      'Keep results free of order effects and practice effects',
+    ],
+    achieved: [
+      'Ran the experiment with counterbalanced condition orders',
+      'Summarized each session into midpoint estimates and JNDs per base correlation',
+    ],
+    process: {
+      image: '',
+      steps: [
+        { title: 'research', points: ['Read the core papers on correlation perception', 'Learned the Stevens and JND tasks, Weber’s and Fechner’s laws'] },
+        { title: 'define', points: ['Opacity conditions: 25%, 50%, 75%, 100% and a mix', 'Five sub-conditions per participant, counterbalanced'] },
+        { title: 'pilot', points: ['Ran the full experiment on myself first', 'Then on a friend, with the project lead observing'] },
+        { title: 'run + analyze', points: ['Ran participants through the Human Subject Pool', 'Summarized JND and midpoint estimates per condition'] },
+      ],
+    },
+    feature: {
+      name: 'One session’s results',
+      body: 'Each line is one opacity condition. A lower JND means people could tell smaller differences in correlation apart. Across conditions, discrimination gets sharper as correlation rises. That is the Weber’s-law-like pattern earlier studies found.',
+      chart: 'jnd',
+    },
+    gallery: [],
+    links: [],
+  },
   {
     slug: 'arctrail',
     tint: 'linear-gradient(160deg,#e4ecee 0%,#cfdcdf 55%,#b9ccd0 100%)',
