@@ -1,5 +1,4 @@
 import { motion, useReducedMotion } from 'motion/react'
-import { SectionLabel } from './Projects'
 import { site } from '../data/site'
 
 const ease = [0.2, 0.7, 0.2, 1] as const
@@ -16,10 +15,9 @@ const letter = [
 export function About() {
   const reduce = useReducedMotion()
   return (
-    <section id="about" className="relative mx-auto max-w-[1440px] px-5 pb-6 pt-24 sm:px-10 md:pt-32">
-      <SectionLabel index="01">about</SectionLabel>
+    <section id="about" className="relative mx-auto max-w-[1440px] px-5 pb-6 pt-16 sm:px-10 md:pt-20">
 
-      <div className="relative mx-auto mt-10 grid max-w-[1080px] items-center gap-12 md:mt-14 md:grid-cols-[minmax(0,1fr)_auto] md:gap-0">
+      <div className="relative mx-auto mt-6 grid max-w-[1080px] items-center gap-12 md:mt-4 md:grid-cols-[minmax(0,1fr)_auto] md:gap-0">
         {/* the letter */}
         <motion.article
           className="relative z-10 rotate-[-0.8deg] bg-[#fffdf6] px-7 pb-10 pt-12 shadow-[0_30px_50px_-30px_rgba(43,42,39,.45),0_2px_4px_rgba(43,42,39,.08)] sm:px-12 sm:pb-12 md:mr-[-40px]"
@@ -60,7 +58,7 @@ export function About() {
         >
           <span className="absolute -top-3 left-1/2 h-6 w-20 -translate-x-1/2 rotate-3 bg-blush/60" aria-hidden />
           <div className="aspect-[4/5] overflow-hidden bg-paper-2">
-            <img src="photos/delia-about.webp" alt="Delia in a black top, smiling in front of shelves of bottles and little figurines" className="h-full w-full object-cover" loading="lazy" draggable={false} />
+            <img src="photos/delia-about.webp" alt="Delia in a white halter dress, striking a playful pose outside a café with red flowers at night" className="h-full w-full object-cover" loading="lazy" draggable={false} />
           </div>
           <figcaption className="absolute inset-x-0 bottom-3 text-center font-mono text-[0.78rem] text-ink-soft">that’s me!</figcaption>
         </motion.figure>
