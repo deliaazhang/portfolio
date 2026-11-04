@@ -28,6 +28,7 @@ const SECTIONS = [
   { id: 'final', label: 'final product' },
   { id: 'reflections', label: 'reflections' },
 ] as const
+const SECTION_IDS = SECTIONS.map((s) => s.id)
 
 function Reveal({ children, className = '', delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
   return (
@@ -45,7 +46,7 @@ function Reveal({ children, className = '', delay = 0 }: { children: ReactNode; 
 
 function Section({ id, label, accent, children }: { id: string; label: string; accent: string; children: ReactNode }) {
   return (
-    <section id={`s-${id}`} className="scroll-mt-28 pt-20 first:pt-12">
+    <section id={`s-${id}`} className="scroll-mt-40 pt-16 first:pt-12">
       <p className="mb-5 font-mono text-[0.72rem] font-medium uppercase tracking-[0.18em]" style={{ color: accent }}>
         {label}
       </p>
@@ -78,16 +79,17 @@ function HeroReel({ project }: { project: Project }) {
 function useActiveSection(ids: readonly string[]) {
   const [active, setActive] = useState(ids[0])
   useEffect(() => {
-    const els = ids.map((id) => document.getElementById(`s-${id}`)).filter(Boolean) as HTMLElement[]
-    const io = new IntersectionObserver(
-      (entries) => {
-        const vis = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
-        if (vis[0]) setActive(vis[0].target.id.slice(2))
-      },
-      { rootMargin: '-30% 0px -60% 0px' },
-    )
-    els.forEach((el) => io.observe(el))
-    return () => io.disconnect()
+    const on = () => {
+      let cur = ids[0]
+      for (const id of ids) {
+        const el = document.getElementById(`s-${id}`)
+        if (el && el.getBoundingClientRect().top <= 200) cur = id
+      }
+      setActive(cur)
+    }
+    on()
+    window.addEventListener('scroll', on, { passive: true })
+    return () => window.removeEventListener('scroll', on)
   }, [ids])
   return active
 }
@@ -98,7 +100,7 @@ export function ProjectDetail({ slug, onBack, onOpen }: { slug: string; onBack: 
   const story = project ? stories[project.slug] : undefined
   const next = projects[(idx + 1) % projects.length]
   const reduce = useReducedMotion()
-  const active = useActiveSection(SECTIONS.map((s) => s.id))
+  const active = useActiveSection(SECTION_IDS)
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
@@ -132,39 +134,39 @@ export function ProjectDetail({ slug, onBack, onOpen }: { slug: string; onBack: 
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="lg:grid lg:grid-cols-[180px_minmax(0,1fr)] lg:gap-16 xl:grid-cols-[200px_minmax(0,820px)] xl:justify-between">
-        {/* sidebar */}
-        <aside className="mb-8 lg:mb-0">
-          <div className="lg:sticky lg:top-[38vh]">
-            <button
-              type="button"
-              onClick={onBack}
-              className="mono-label group inline-flex items-center gap-2 rounded-full border border-line bg-paper px-4 py-2 text-ink-soft transition hover:border-ink hover:text-ink"
-            >
-              <span className="transition-transform group-hover:-translate-x-0.5">‹</span> back
-            </button>
-            <nav className="mt-8 hidden lg:block" aria-label="Sections">
-              <ul className="space-y-2.5">
-                {SECTIONS.map((sec) => (
-                  <li key={sec.id}>
-                    <button
-                      type="button"
-                      onClick={() => jump(sec.id)}
-                      aria-current={active === sec.id ? 'true' : undefined}
-                      className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-ink-faint transition-colors hover:text-ink"
-                      style={active === sec.id ? { color: p.accent } : undefined}
-                    >
-                      {sec.label}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-        </aside>
+      <div className="mx-auto max-w-[900px]">
+        <button
+          type="button"
+          onClick={onBack}
+          className="mono-label group mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-paper px-4 py-2 text-ink-soft transition hover:border-ink hover:text-ink"
+        >
+          <span className="transition-transform group-hover:-translate-x-0.5">‹</span> all work
+        </button>
 
-        {/* content */}
-        <article className="min-w-0">
+        {/* section bar */}
+        <nav
+          className="sticky top-[60px] z-20 -mx-5 mb-8 border-y border-line bg-paper/95 px-5 backdrop-blur-md sm:top-[76px] sm:mx-0 sm:rounded-full sm:border sm:px-2"
+          aria-label="Sections"
+        >
+          <ul className="no-scrollbar flex gap-1 overflow-x-auto py-2">
+            {SECTIONS.map((sec) => (
+              <li key={sec.id} className="shrink-0">
+                <button
+                  type="button"
+                  onClick={() => jump(sec.id)}
+                  aria-current={active === sec.id ? 'true' : undefined}
+                  className="whitespace-nowrap rounded-full px-3 py-1.5 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-ink-faint transition-colors hover:text-ink"
+                  style={active === sec.id ? { color: '#fff', background: p.accent } : undefined}
+                >
+                  {sec.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* content, on a solid sheet so the grid doesn't fight the text */}
+        <article className="min-w-0 rounded-[24px] border border-line bg-paper px-5 pb-12 pt-5 shadow-[0_30px_60px_-40px_rgba(43,42,39,.35)] sm:px-10 sm:pt-8 md:px-14">
           <HeroReel project={p} />
 
           <div className="mt-8 flex items-center gap-2.5 text-[0.98rem] text-ink">
