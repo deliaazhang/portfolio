@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { site } from '../data/site'
-import { Doodle } from './Doodles'
+import { MatchaRun } from './MatchaRun'
 
 const links = [
   { label: 'Email', href: `mailto:${site.email}` },
@@ -24,10 +24,7 @@ export function Footer() {
         </motion.h2>
 
         <div className="mt-12 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
-          <div className="flex items-center gap-4">
-            <Doodle name="matcha" size={56} draw={false} className="text-sage-deep" />
-            <p className="font-mono text-[1.05rem] text-ink-soft sm:text-[1.2rem]">let’s connect ♡</p>
-          </div>
+          <p className="font-mono text-[1.05rem] text-ink-soft sm:text-[1.2rem]">let’s connect!</p>
           <ul className="flex flex-wrap gap-x-8 gap-y-3">
             {links.map((l) => (
               <li key={l.label}>
@@ -45,6 +42,8 @@ export function Footer() {
             ))}
           </ul>
         </div>
+
+        <MatchaRun />
 
         <div className="mt-20 flex flex-col gap-3 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-ink-faint sm:flex-row sm:items-center sm:justify-between">
           <p>designed &amp; made by delia</p>
