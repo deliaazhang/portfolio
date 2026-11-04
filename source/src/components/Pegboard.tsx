@@ -526,7 +526,7 @@ export function Pegboard() {
           viewport={{ once: true, amount: 0.6 }}
           transition={{ duration: 0.8 }}
         >
-          a little more <span className="serif-i">about me</span> <span className="text-blush">♡</span>
+          a little more <span className="serif-i">about me</span>
         </motion.h2>
         <div className="max-w-sm">
           <p className="text-[1.05rem] leading-relaxed text-ink-soft">
