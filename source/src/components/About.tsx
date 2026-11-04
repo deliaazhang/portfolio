@@ -5,10 +5,10 @@ const ease = [0.2, 0.7, 0.2, 1] as const
 
 /** ✎ The hello letter at the top of the About page. Keep it short and casual. */
 const letter = [
-  'hi! i’m delia — a ux/ui designer studying cognitive systems and data science at ubc.',
-  'i’m happiest somewhere between design and data: figuring out why people do what they do, then making things that feel a little simpler and kinder to use.',
-  'when i’m not designing, you’ll probably find me hunting down the next great matcha, sketching portraits, playing chess, or planning the next trip.',
-  'thanks for stopping by. have a look around my corner ↓',
+  'hi! i’m delia — a UX/UI designer studying cognitive systems and data science at UBC.',
+  'i love exploring the intersection of design and data, especially understanding how people think and finding ways to make everyday experiences more thoughtful and intuitive.',
+  'outside of design, i love travelling and capturing little moments through my camera. you’ll also find me trying out new makeup looks, going to concerts, or searching for a good matcha spot.',
+  'thanks for stopping by! feel free to explore my little corner of the internet ♡',
 ]
 
 /** A short, signed note on lined paper, with a taped polaroid. */
