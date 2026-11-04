@@ -60,7 +60,7 @@ export function About() {
         >
           <span className="absolute -top-3 left-1/2 h-6 w-20 -translate-x-1/2 rotate-3 bg-blush/60" aria-hidden />
           <div className="aspect-[4/5] overflow-hidden bg-paper-2">
-            <img src="photos/delia.webp" alt="Delia in a white dress" className="h-full w-full object-cover" loading="lazy" draggable={false} />
+            <img src="photos/delia-about.webp" alt="Delia in a black top, smiling in front of shelves of bottles and little figurines" className="h-full w-full object-cover" loading="lazy" draggable={false} />
           </div>
           <figcaption className="absolute inset-x-0 bottom-3 text-center font-mono text-[0.78rem] text-ink-soft">that’s me!</figcaption>
         </motion.figure>
