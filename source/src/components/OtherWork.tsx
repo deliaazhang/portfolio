@@ -106,7 +106,7 @@ export function OtherWork() {
         </p>
       </div>
 
-      <ul className="grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-8 md:grid-cols-3 lg:grid-cols-4">
+      <ul className="grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-10 md:grid-cols-3 md:gap-y-14 lg:gap-x-14 xl:px-10">
         {designs.map((d, i) => {
           const tilt = TILTS[i % TILTS.length]
           return (
