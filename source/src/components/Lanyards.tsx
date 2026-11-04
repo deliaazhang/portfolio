@@ -164,7 +164,7 @@ export function Lanyards() {
           a few <span className="serif-i">lanyards</span> later
         </h2>
         <p className="max-w-sm font-mono text-[0.75rem] leading-relaxed text-ink-soft">
-          the teams i’ve been part of. <span className="text-ink-faint">hover to swing, click to flip one over.</span>
+          a little look at the teams i’ve been part of. <span className="text-ink-faint">hover to give one a swing, and click to flip it over ♡</span>
         </p>
       </div>
 
