@@ -84,4 +84,28 @@ export const designs: Design[] = [
     images: ['designs/aus-program-rep.webp'],
     alt: 'Grid-paper notebook collage with a podium and torn paper banner inviting students to be an AUS program representative',
   },
+  {
+    id: 'wids-island',
+    title: 'WiDS@UBC Island',
+    org: 'WiDS@UBC',
+    kind: 'summer recap carousel',
+    images: ['designs/wids-island-1.webp', 'designs/wids-island-2.webp'],
+    alt: 'Pink beach-themed WiDS@UBC summer recap carousel: a glass heart in pink sand, then a member spotlight slide with a laptop of travel photos',
+  },
+  {
+    id: 'aus-spook-slime',
+    title: 'Spook & Slime',
+    org: 'Arts Undergraduate Society',
+    kind: 'event poster',
+    images: ['designs/aus-spook-and-slime.webp'],
+    alt: 'Purple Halloween poster with spider webs, string lights and a cauldron overflowing with slime for the Spook & Slime event',
+  },
+  {
+    id: 'wids-alumnight',
+    title: 'Alumnight Mentors',
+    org: 'WiDS@UBC',
+    kind: 'event carousel',
+    images: ['designs/wids-alumnight-1.webp', 'designs/wids-alumnight-2.webp'],
+    alt: 'WiDS@UBC Alumnight carousel: gloved hands holding a glowing folder, then a mentor slide with four polaroid profiles paper-clipped to a file folder',
+  },
 ]
