@@ -10,7 +10,7 @@ export const site = {
   github: 'https://github.com/deliaazhang', // ← guessed from deliaazhang.github.io — double-check
   resume: 'resume.pdf', // /public/resume.pdf
   /** Photo shown on the hero camera's screen. Leave undefined to show your hand-drawn portrait. */
-  heroPhoto: 'photos/delia-braids.webp' as string | undefined,
+  heroPhoto: 'photos/film-matcha.webp' as string | undefined,
   portrait: 'images/portrait.png',
   lastUpdated: '11/26',
   /** ✎ The scrolling "currently" strip under the intro. Keep each one short. */
