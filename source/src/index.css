@@ -115,6 +115,12 @@ body {
   0%, 100% { transform: translateY(0) rotate(-0.6deg); }
   50% { transform: translateY(-7px) rotate(0.6deg); }
 }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.anim-marquee { animation: marquee 48s linear infinite; }
+.ticker:hover .anim-marquee, .ticker:focus-within .anim-marquee { animation-play-state: paused; }
 @keyframes wave-x {
   from { transform: translateX(0); }
   to { transform: translateX(-120px); }
@@ -143,7 +149,7 @@ body {
 .anim-nudge { animation: nudge-down 1.8s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  .anim-float, .anim-wave, .anim-ice, .anim-blink, .anim-sway, .anim-nudge { animation: none !important; }
+  .anim-float, .anim-wave, .anim-ice, .anim-blink, .anim-sway, .anim-nudge, .anim-marquee { animation: none !important; }
 }
 
 .no-scrollbar { scrollbar-width: none; }

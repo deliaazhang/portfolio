@@ -63,7 +63,7 @@ export function Hero({ delay, cameraAway }: { delay: number; cameraAway: boolean
   const d = (n: number) => (reduce ? 0 : delay + n)
 
   return (
-    <section id="top" className="relative mx-auto flex min-h-[100svh] max-w-[1440px] flex-col px-5 pb-16 pt-28 sm:px-10 md:pt-32">
+    <section id="top" className="relative mx-auto flex min-h-[calc(100svh-58px)] max-w-[1440px] flex-col px-5 pb-8 pt-28 sm:px-10 md:pt-32">
       <div className="grid flex-1 items-center gap-y-10 md:grid-cols-12 md:gap-x-6">
         {/* intro */}
         <div className="relative z-10 md:col-span-7">
