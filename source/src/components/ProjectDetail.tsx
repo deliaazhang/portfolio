@@ -101,6 +101,17 @@ export function ProjectDetail({ slug, onBack, onOpen }: { slug: string; onBack: 
   const next = projects[(idx + 1) % projects.length]
   const reduce = useReducedMotion()
   const active = useActiveSection(SECTION_IDS)
+  const titleRef = useRef<HTMLUListElement>(null)
+  const [showBar, setShowBar] = useState(false)
+  useEffect(() => {
+    const on = () => {
+      const el = titleRef.current
+      setShowBar(!!el && el.getBoundingClientRect().bottom < 90)
+    }
+    on()
+    window.addEventListener('scroll', on, { passive: true })
+    return () => window.removeEventListener('scroll', on)
+  }, [slug])
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
@@ -138,43 +149,48 @@ export function ProjectDetail({ slug, onBack, onOpen }: { slug: string; onBack: 
         <button
           type="button"
           onClick={onBack}
-          className="mono-label group mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-paper px-4 py-2 text-ink-soft transition hover:border-ink hover:text-ink"
+          className="mono-label group mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-paper px-4 py-2 text-ink-soft transition hover:border-ink hover:text-ink"
         >
           <span className="transition-transform group-hover:-translate-x-0.5">‹</span> all work
         </button>
 
-        {/* section bar */}
-        <nav
-          className="sticky top-[60px] z-20 -mx-5 mb-8 border-y border-line bg-paper/95 px-5 backdrop-blur-md sm:top-[76px] sm:mx-0 sm:rounded-full sm:border sm:px-2"
+        {/* section bar: slides in once the title has scrolled away */}
+        <motion.nav
+          className="fixed inset-x-0 top-[60px] z-20 px-0 sm:top-[76px] sm:px-10"
           aria-label="Sections"
+          aria-hidden={!showBar}
+          initial={false}
+          animate={{ y: showBar ? 0 : -16, opacity: showBar ? 1 : 0, pointerEvents: showBar ? 'auto' : 'none' }}
+          transition={{ duration: 0.25, ease }}
         >
-          <ul className="no-scrollbar flex gap-1 overflow-x-auto py-2">
-            {SECTIONS.map((sec) => (
-              <li key={sec.id} className="shrink-0">
-                <button
-                  type="button"
-                  onClick={() => jump(sec.id)}
-                  aria-current={active === sec.id ? 'true' : undefined}
-                  className="whitespace-nowrap rounded-full px-3 py-1.5 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-ink-faint transition-colors hover:text-ink"
-                  style={active === sec.id ? { color: '#fff', background: p.accent } : undefined}
-                >
-                  {sec.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
+          <div className="mx-auto max-w-[900px] border-y border-line bg-paper/95 px-5 backdrop-blur-md sm:rounded-full sm:border sm:px-2">
+            <ul className="no-scrollbar flex gap-1 overflow-x-auto py-2">
+              {SECTIONS.map((sec) => (
+                <li key={sec.id} className="shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => jump(sec.id)}
+                    tabIndex={showBar ? undefined : -1}
+                    aria-current={active === sec.id ? 'true' : undefined}
+                    className="whitespace-nowrap rounded-full px-3 py-1.5 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-ink-faint transition-colors hover:text-ink"
+                    style={active === sec.id ? { color: '#fff', background: p.accent } : undefined}
+                  >
+                    {sec.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </motion.nav>
 
         {/* content, on a solid sheet so the grid doesn't fight the text */}
         <article className="min-w-0 rounded-[24px] border border-line bg-paper px-5 pb-12 pt-5 shadow-[0_30px_60px_-40px_rgba(43,42,39,.35)] sm:px-10 sm:pt-8 md:px-14">
-          <HeroReel project={p} />
-
-          <div className="mt-8 flex items-center gap-2.5 text-[0.98rem] text-ink">
+          <div className="flex items-center gap-2.5 text-[0.98rem] text-ink">
             <span className="h-2.5 w-2.5 rounded-full" style={{ background: p.accent }} aria-hidden />
             {p.event}
           </div>
           <h1 className="serif-i mt-3 text-[clamp(3rem,7vw,5.6rem)] leading-[0.95] text-ink">{p.title}</h1>
-          <ul className="mt-6 flex flex-wrap gap-2">
+          <ul ref={titleRef} className="mb-8 mt-5 flex flex-wrap gap-2">
             <li className="inline-flex items-center gap-1.5 rounded-full border border-line bg-paper px-3 py-1.5 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-ink-soft">
               <span className="h-1.5 w-1.5 rounded-full bg-[#f2b84b]" aria-hidden /> {p.year}
             </li>
@@ -184,6 +200,8 @@ export function ProjectDetail({ slug, onBack, onOpen }: { slug: string; onBack: 
               </li>
             ))}
           </ul>
+          <HeroReel project={p} />
+
 
           {/* TL;DR */}
           <Section id="tldr" label="tl;dr" accent={p.accent}>
