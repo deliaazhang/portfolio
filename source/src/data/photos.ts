@@ -25,9 +25,9 @@ export type Photo = {
 export const photos: Photo[] = [
   {
     id: 'me',
-    src: 'photos/delia-tokyo.webp',
-    alt: 'Delia standing in front of a row of colourful vending machines in Harajuku, Tokyo',
-    caption: 'hi, it’s me! vending machine hunting in tokyo ♡',
+    src: 'photos/delia-matcha.webp',
+    alt: 'Delia in a white top sitting by a café window, holding an iced matcha',
+    caption: 'hi, it’s me! iced matcha in hand, as always 🍵',
     scene: 'city',
     colors: ['#e9dcc6', '#c79f78', '#7b5a43'],
   },
