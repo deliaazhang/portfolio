@@ -5,6 +5,51 @@ import { Matcha } from './Matcha'
 import { usePointer } from '../hooks/usePointer'
 import { site } from '../data/site'
 
+/** A synthesized point-and-shoot: two autofocus beeps, then the shutter clack (no audio file needed). */
+function playShutter() {
+  try {
+    const AC = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
+    if (!AC) return
+    const ctx = new AC()
+    const t0 = ctx.currentTime + 0.02
+    const beep = (at: number) => {
+      const o = ctx.createOscillator()
+      const g = ctx.createGain()
+      o.type = 'sine'
+      o.frequency.value = 2900
+      g.gain.setValueAtTime(0, at)
+      g.gain.linearRampToValueAtTime(0.06, at + 0.005)
+      g.gain.exponentialRampToValueAtTime(0.0001, at + 0.07)
+      o.connect(g).connect(ctx.destination)
+      o.start(at)
+      o.stop(at + 0.08)
+    }
+    const click = (at: number, dur: number, freq: number, vol: number) => {
+      const len = Math.floor(ctx.sampleRate * dur)
+      const buf = ctx.createBuffer(1, len, ctx.sampleRate)
+      const d = buf.getChannelData(0)
+      for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 4)
+      const src = ctx.createBufferSource()
+      src.buffer = buf
+      const f = ctx.createBiquadFilter()
+      f.type = 'bandpass'
+      f.frequency.value = freq
+      f.Q.value = 0.9
+      const g = ctx.createGain()
+      g.gain.value = vol
+      src.connect(f).connect(g).connect(ctx.destination)
+      src.start(at)
+    }
+    beep(t0 + 0.2)
+    beep(t0 + 0.32)
+    click(t0 + 0.8, 0.05, 3200, 0.9) // shutter opens
+    click(t0 + 0.88, 0.08, 1500, 0.7) // curtain closes
+    window.setTimeout(() => ctx.close(), 2000)
+  } catch {
+    /* sound is a nice-to-have */
+  }
+}
+
 type Phase = 'idle' | 'press' | 'focus' | 'flash' | 'dive'
 
 /**
@@ -33,6 +78,7 @@ export function Entrance({ onEnter, onSkip }: { onEnter: () => void; onSkip: () 
   const at = (ms: number, fn: () => void) => timers.current.push(window.setTimeout(fn, ms))
 
   const enter = () => {
+    playShutter()
     if (phase !== 'idle') return
     if (reduce) {
       onSkip()

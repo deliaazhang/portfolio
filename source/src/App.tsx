@@ -102,8 +102,11 @@ export default function App() {
               <Nav onSection={onSection} current={route.name} />
               {route.name === 'home' ? (
                 <main>
-                  <Hero delay={heroDelay.current} cameraAway={gallery?.origin === 'hero'} />
-                  <Ticker />
+                  {/* first screen: intro fills the space, ticker sits on the bottom edge */}
+                  <div className="flex min-h-[100svh] flex-col">
+                    <Hero delay={heroDelay.current} cameraAway={gallery?.origin === 'hero'} />
+                    <Ticker />
+                  </div>
                   <Projects onOpen={openProject} />
                   <OtherWork />
                 </main>

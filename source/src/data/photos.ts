@@ -16,13 +16,21 @@ export type Photo = {
   /** the little note that pops up like a message */
   caption: string
   /** shown as an orange date stamp, old-camera style */
-  date: string
+  date?: string
   location?: string
   scene: Scene
   colors: [string, string, string]
 }
 
 export const photos: Photo[] = [
+  {
+    id: 'me',
+    src: 'photos/delia-subway.webp',
+    alt: 'Delia smiling on a subway platform in front of a moving train',
+    caption: 'hi, it’s me! caught between trains ♡',
+    scene: 'city',
+    colors: ['#e9dcc6', '#c79f78', '#7b5a43'],
+  },
   {
     id: 'cafe',
     alt: 'Placeholder — a cosy café window seat',

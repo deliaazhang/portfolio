@@ -81,14 +81,173 @@ function Lightbox({ design, onClose }: { design: Design; onClose: () => void }) 
   )
 }
 
-export function OtherWork() {
+function useMedia(q: string) {
+  const [m, setM] = useState(() => window.matchMedia(q).matches)
+  useEffect(() => {
+    const mq = window.matchMedia(q)
+    const on = () => setM(mq.matches)
+    mq.addEventListener('change', on)
+    return () => mq.removeEventListener('change', on)
+  }, [q])
+  return m
+}
+
+function useWidth(ref: React.RefObject<HTMLElement | null>) {
+  const [w, setW] = useState(0)
+  useEffect(() => {
+    if (!ref.current) return
+    const ro = new ResizeObserver(([e]) => setW(e.contentRect.width))
+    ro.observe(ref.current)
+    return () => ro.disconnect()
+  }, [ref])
+  return w
+}
+
+// stable little offsets so the pile looks hand-stacked
+const jitter = (i: number, amp: number) => {
+  const v = Math.sin(i * 12.9898 + amp * 78.233) * 43758.5453
+  return v - Math.floor(v)
+}
+
+function Poster({ d, i }: { d: Design; i: number }) {
+  return (
+    <span className="relative block bg-white p-[5px] shadow-[0_14px_24px_-14px_rgba(43,42,39,.55),0_1px_2px_rgba(43,42,39,.1)]">
+      <span className={`absolute -top-2 left-1/2 z-10 h-4 w-12 -translate-x-1/2 rotate-[-3deg] ${TAPES[i % TAPES.length]}`} aria-hidden />
+      <span className="relative block aspect-[4/5] overflow-hidden bg-paper-2">
+        <img src={d.images[0]} alt="" loading="lazy" decoding="async" draggable={false} className="h-full w-full object-cover" />
+        {d.images.length > 1 && (
+          <span className="absolute right-1.5 top-1.5 rounded-full bg-ink/70 px-1.5 py-px font-mono text-[0.55rem] text-paper">1/{d.images.length}</span>
+        )}
+      </span>
+    </span>
+  )
+}
+
+/** Desktop: a stacked pile that fans out while hovered (or focused). */
+function Pile({ onOpen }: { onOpen: (d: Design) => void }) {
   const reduce = useReducedMotion()
-  const [open, setOpen] = useState<Design | null>(null)
-  const close = useCallback(() => setOpen(null), [])
+  const ref = useRef<HTMLDivElement>(null)
+  const W = useWidth(ref)
+  const [spread, setSpread] = useState(false)
+  const [hot, setHot] = useState<number | null>(null)
+  const leave = useRef<number | undefined>(undefined)
+  const n = designs.length
+  const cw = Math.max(130, Math.min(190, W * 0.15))
+  const ch = cw * 1.25 + 10
+  const H = ch + 110
+
+  const place = (i: number) => {
+    if (!spread) {
+      return {
+        x: W / 2 - cw / 2 + (jitter(i, 1) - 0.5) * 70,
+        y: 40 + (jitter(i, 2) - 0.5) * 26,
+        rotate: (jitter(i, 3) - 0.5) * 22,
+        scale: 1,
+      }
+    }
+    const t = n > 1 ? i / (n - 1) : 0.5
+    const span = W - cw
+    const lift = hot === i ? -26 : 0
+    return {
+      x: t * span,
+      y: 44 + Math.pow(t - 0.5, 2) * 120 + lift,
+      rotate: (t - 0.5) * 18 * (hot === i ? 0.3 : 1),
+      scale: hot === i ? 1.1 : 1,
+    }
+  }
+
+  const open = () => {
+    window.clearTimeout(leave.current)
+    setSpread(true)
+  }
+  const shut = () => {
+    leave.current = window.setTimeout(() => {
+      setSpread(false)
+      setHot(null)
+    }, 220)
+  }
+  useEffect(() => () => window.clearTimeout(leave.current), [])
+
+  const label = hot !== null ? designs[hot] : null
 
   return (
-    <section id="other-work" className="relative mx-auto max-w-[1440px] px-5 pb-8 pt-8 sm:px-10 md:pt-12">
-      <div className="mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
+    <div
+      ref={ref}
+      className="relative mx-auto w-full max-w-[1120px]"
+      style={{ height: H }}
+      onPointerEnter={open}
+      onPointerLeave={shut}
+      onFocus={open}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) shut()
+      }}
+    >
+      {W > 0 &&
+        designs.map((d, i) => (
+          <motion.button
+            key={d.id}
+            type="button"
+            onClick={() => onOpen(d)}
+            onPointerEnter={() => spread && setHot(i)}
+            onPointerLeave={() => setHot((h) => (h === i ? null : h))}
+            onFocus={() => setHot(i)}
+            data-cursor={spread ? 'look closer' : 'spread them out'}
+            aria-label={`${d.title}, ${d.kind} for ${d.org}. Open larger`}
+            className="absolute left-0 top-0 block"
+            style={{ width: cw, zIndex: hot === i ? 50 : spread ? i + 1 : n - i }}
+            initial={false}
+            animate={place(i)}
+            transition={reduce ? { duration: 0 } : { type: 'spring', stiffness: 170, damping: 20, mass: 0.7, delay: spread && hot === null ? i * 0.015 : 0 }}
+          >
+            <Poster d={d} i={i} />
+          </motion.button>
+        ))}
+
+      {/* caption for the poster under the cursor */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex h-12 flex-col items-center justify-end text-center" aria-live="polite">
+        <AnimatePresence mode="wait">
+          {label ? (
+            <motion.p key={label.id} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }}>
+              <span className="serif-i text-[1.35rem] text-ink">{label.title}</span>
+              <span className="ml-3 font-mono text-[0.64rem] uppercase tracking-[0.14em] text-ink-faint">
+                {label.org === 'Arts Undergraduate Society' ? 'AUS' : label.org} · {label.kind}
+              </span>
+            </motion.p>
+          ) : (
+            <motion.p key={spread ? 'pick' : 'hint'} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="font-mono text-[0.7rem] tracking-wide text-ink-faint">
+              {spread ? 'click a poster for a closer look' : `hover the pile · ${n} posters`}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  )
+}
+
+/** Touch / narrow screens: a swipeable row. */
+function Strip({ onOpen }: { onOpen: (d: Design) => void }) {
+  return (
+    <ul className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 pt-4 sm:-mx-10 sm:px-10">
+      {designs.map((d, i) => (
+        <li key={d.id} className="w-[42vw] max-w-[200px] shrink-0 snap-start" style={{ rotate: `${TILTS[i % TILTS.length] * 0.6}deg` }}>
+          <button type="button" onClick={() => onOpen(d)} aria-label={`${d.title}, ${d.kind} for ${d.org}. Open larger`} className="block w-full text-left">
+            <Poster d={d} i={i} />
+            <span className="serif-i mt-2.5 block text-[1.05rem] leading-tight text-ink">{d.title}</span>
+          </button>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+export function OtherWork() {
+  const [open, setOpen] = useState<Design | null>(null)
+  const close = useCallback(() => setOpen(null), [])
+  const fan = useMedia('(min-width: 768px) and (pointer: fine)')
+
+  return (
+    <section id="other-work" className="relative mx-auto max-w-[1440px] overflow-x-clip px-5 pb-8 pt-8 sm:px-10 md:pt-12">
+      <div className="mb-6 flex flex-col gap-6 md:mb-4 md:flex-row md:items-end md:justify-between">
         <div>
           <SectionLabel index="02">graphic design</SectionLabel>
           <motion.h2
@@ -102,51 +261,11 @@ export function OtherWork() {
           </motion.h2>
         </div>
         <p className="max-w-xs font-mono text-[0.78rem] leading-relaxed text-ink-soft">
-          posters and social graphics for Women in Data Science and the Arts Undergraduate Society. click one for a closer look.
+          posters and social graphics for Women in Data Science and the Arts Undergraduate Society.
         </p>
       </div>
 
-      <ul className="grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-10 md:grid-cols-3 md:gap-y-14 lg:gap-x-14 xl:px-10">
-        {designs.map((d, i) => {
-          const tilt = TILTS[i % TILTS.length]
-          return (
-            <motion.li
-              key={d.id}
-              initial={reduce ? false : { opacity: 0, y: 40, rotate: tilt * 2 }}
-              whileInView={{ opacity: 1, y: 0, rotate: tilt }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ type: 'spring', stiffness: 120, damping: 16, delay: (i % 4) * 0.08 }}
-              whileHover={reduce ? undefined : { rotate: 0, y: -8, scale: 1.03, transition: { type: 'spring', stiffness: 300, damping: 20 } }}
-            >
-              <button
-                type="button"
-                onClick={() => setOpen(d)}
-                data-cursor="look closer"
-                aria-label={`${d.title}, ${d.kind} for ${d.org}. Open larger`}
-                className="group relative block w-full text-left"
-              >
-                <span className={`absolute -top-2.5 left-1/2 z-10 h-5 w-16 -translate-x-1/2 rotate-[-3deg] ${TAPES[i % TAPES.length]}`} aria-hidden />
-                <span className="relative block bg-white p-2 pb-2 shadow-[0_18px_30px_-18px_rgba(43,42,39,.5),0_1px_2px_rgba(43,42,39,.08)] transition-shadow duration-500 group-hover:shadow-[0_28px_40px_-20px_rgba(43,42,39,.55)]">
-                  <span className="relative block aspect-[4/5] overflow-hidden bg-paper-2">
-                    <img src={d.images[0]} alt={d.alt} loading="lazy" decoding="async" draggable={false} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
-                    {d.images.length > 1 && (
-                      <span className="absolute right-2 top-2 rounded-full bg-ink/70 px-2 py-0.5 font-mono text-[0.6rem] text-paper backdrop-blur">
-                        1/{d.images.length}
-                      </span>
-                    )}
-                  </span>
-                </span>
-                <span className="mt-3 block px-1">
-                  <span className="serif-i block text-[1.3rem] leading-tight text-ink">{d.title}</span>
-                  <span className="mt-1 block font-mono text-[0.64rem] uppercase tracking-[0.14em] text-ink-faint">
-                    {d.org === 'Arts Undergraduate Society' ? 'AUS' : d.org} · {d.kind}
-                  </span>
-                </span>
-              </button>
-            </motion.li>
-          )
-        })}
-      </ul>
+      {fan ? <Pile onOpen={setOpen} /> : <Strip onOpen={setOpen} />}
 
       <AnimatePresence>{open && <Lightbox design={open} onClose={close} />}</AnimatePresence>
     </section>
