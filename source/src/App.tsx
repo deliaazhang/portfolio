@@ -7,6 +7,7 @@ import { Hero } from './components/Hero'
 import { Projects } from './components/Projects'
 import { About } from './components/About'
 import { Pegboard } from './components/Pegboard'
+import { Lanyards } from './components/Lanyards'
 import { Ticker } from './components/Ticker'
 import { OtherWork } from './components/OtherWork'
 import { Footer } from './components/Footer'
@@ -146,6 +147,7 @@ function AboutPage() {
     <main className="pt-10 md:pt-12">
       <About />
       <Pegboard />
+      <Lanyards />
     </main>
   )
 }
