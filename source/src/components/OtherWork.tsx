@@ -153,9 +153,9 @@ export function OtherWork() {
           Other things <span className="serif-i">I’ve made</span>
         </motion.h2>
         <p className="mt-5 max-w-[34rem] font-mono text-[0.78rem] leading-relaxed text-ink-soft">
-          posters and social graphics for Women in Data Science and the Arts Undergraduate Society.{' '}
-          <span className="text-ink-faint [@media(pointer:coarse)]:hidden">hover to pause, click to look closer.</span>
-          <span className="hidden text-ink-faint [@media(pointer:coarse)]:inline">tap a poster to look closer.</span>
+          a little collection of graphics and creative work i’ve designed along the way.{' '}
+          <span className="text-ink-faint [@media(pointer:coarse)]:hidden">hover to pause, click to take a closer look ♡</span>
+          <span className="hidden text-ink-faint [@media(pointer:coarse)]:inline">tap a poster to take a closer look ♡</span>
         </p>
       </div>
 
