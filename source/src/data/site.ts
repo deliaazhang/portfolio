@@ -19,8 +19,8 @@ export const site = {
     { label: 'also', text: 'VP Internal @ WiDS@UBC' },
     { label: 'studying', text: 'Cognitive Systems + Data Science @ UBC' },
     { label: 'recently', text: 'studied abroad in Barcelona' },
-    { label: 'proud of', text: 'Best Beginner Team @ youCode 2025' },
-    { label: 'sketching', text: 'pencil portraits' },
-    { label: 'iced matcha count', text: '∞' },
+    { label: 'proud of', text: 'my new chess score! (1800)' },
+    { label: 'currently watching', text: 'Where the Mask Ends' },
+    { label: 'amount of molly tea consumed', text: '∞' },
   ],
 }
