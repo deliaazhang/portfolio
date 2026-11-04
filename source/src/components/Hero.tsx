@@ -95,17 +95,6 @@ export function Hero({ delay, cameraAway }: { delay: number; cameraAway: boolean
             <p className="mt-5 font-mono text-[0.78rem] tracking-wide text-ink-soft">
               ux/ui designer · cognitive systems + data science @ ubc
             </p>
-            <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[0.78rem] tracking-wide text-ink-soft">
-              <span className="inline-flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-sage" /> design
-              </span>
-              <span className="text-ink-faint">+</span>
-              <span className="inline-flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-sky" /> data
-              </span>
-              <span className="text-ink-faint">=</span>
-              <span className="serif-i text-[1.05rem] tracking-normal text-ink">understanding people</span>
-            </p>
           </motion.div>
         </div>
 
@@ -139,13 +128,6 @@ export function Hero({ delay, cameraAway }: { delay: number; cameraAway: boolean
                 </motion.button>
               </motion.div>
             )}
-
-            <motion.p
-              className="mt-8 text-right font-mono text-[0.7rem] uppercase tracking-[0.18em] text-ink-faint"
-              animate={{ opacity: cameraAway ? 0 : 1 }}
-            >
-              fig. 01 — my camera, full of little memories
-            </motion.p>
           </div>
         </motion.div>
       </div>
