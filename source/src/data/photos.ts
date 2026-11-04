@@ -25,9 +25,9 @@ export type Photo = {
 export const photos: Photo[] = [
   {
     id: 'me',
-    src: 'photos/delia-matcha.webp',
-    alt: 'Delia in a white top sitting by a café window, holding an iced matcha',
-    caption: 'hi, it’s me! iced matcha in hand, as always 🍵',
+    src: 'photos/delia-braids.webp',
+    alt: 'Delia with two braids and a brown top, sitting on a step on a quiet street',
+    caption: 'hi, it’s me! braid day ♡',
     scene: 'city',
     colors: ['#e9dcc6', '#c79f78', '#7b5a43'],
   },
@@ -42,7 +42,8 @@ export const photos: Photo[] = [
   },
   {
     id: 'matcha',
-    alt: 'Placeholder — an iced matcha latte',
+    src: 'photos/delia-matcha.webp',
+    alt: 'Delia in a white top sitting by a café window, holding an iced matcha',
     caption: 'iced matcha count this month: i stopped counting 🍵',
     date: "'25 04 02",
     location: 'the usual spot',
