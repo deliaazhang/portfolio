@@ -140,7 +140,7 @@ export function Projects({ onOpen }: { onOpen: (slug: string) => void }) {
           </motion.h2>
         </div>
         <p className="max-w-xs font-mono text-[0.78rem] leading-relaxed text-ink-soft">
-          hackathons and case competitions — each one started with noticing something small about how people live.
+          a collection of my work and projects, from creative ideas to meaningful experiences!
         </p>
       </div>
 
