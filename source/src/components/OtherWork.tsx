@@ -141,27 +141,27 @@ export function OtherWork() {
   
   return (
     <section id="other-work" className="relative mx-auto max-w-[1440px] overflow-x-clip px-5 pb-8 pt-8 sm:px-10 md:pt-12">
-      <div className="mb-6 flex flex-col gap-6 md:mb-4 md:flex-row md:items-end md:justify-between">
-        <div>
-          <SectionLabel index="02">graphic design</SectionLabel>
-          <motion.h2
-            className="display mt-6 text-[clamp(2.4rem,5.5vw,5rem)]"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 0.8 }}
-          >
-            Other things <span className="serif-i">I’ve made</span>
-          </motion.h2>
-        </div>
-        <p className="max-w-xs font-mono text-[0.78rem] leading-relaxed text-ink-soft">
+      <div className="max-w-3xl">
+        <SectionLabel index="02">graphic design</SectionLabel>
+        <motion.h2
+          className="display mt-6 text-[clamp(2.4rem,5.5vw,5rem)]"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.8 }}
+        >
+          Other things <span className="serif-i">I’ve made</span>
+        </motion.h2>
+        <p className="mt-5 max-w-[34rem] font-mono text-[0.78rem] leading-relaxed text-ink-soft">
           posters and social graphics for Women in Data Science and the Arts Undergraduate Society.{' '}
-          <span className="[@media(pointer:coarse)]:hidden">hover to pause, click to look closer.</span>
-          <span className="hidden [@media(pointer:coarse)]:inline">tap a poster to look closer.</span>
+          <span className="text-ink-faint [@media(pointer:coarse)]:hidden">hover to pause, click to look closer.</span>
+          <span className="hidden text-ink-faint [@media(pointer:coarse)]:inline">tap a poster to look closer.</span>
         </p>
       </div>
 
-      <PosterTicker onOpen={setOpen} />
+      <div className="mt-10 md:mt-14">
+        <PosterTicker onOpen={setOpen} />
+      </div>
 
       <AnimatePresence>{open && <Lightbox design={open} onClose={close} />}</AnimatePresence>
     </section>
