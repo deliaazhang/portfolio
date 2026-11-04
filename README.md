@@ -23,4 +23,5 @@ Then commit and push. Pages updates a minute or two later.
 | Camera-roll photos and captions | `source/src/data/photos.ts` |
 | Pegboard items | `source/src/data/pegboard.ts` |
 | Experience, education, skills | `source/src/data/resume.ts` |
-| Images | `source/public/` |
+| Images | `source/public/` | 
+
