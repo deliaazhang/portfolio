@@ -364,9 +364,9 @@ function BoardItem({
   const swing = swings(item.mount)
   const origin = item.mount === 'stand' ? '50% 100%' : swing ? '50% 0%' : '50% 30%'
   const isStick = item.kind === 'lightstick'
-  /** charms, the matcha cup and the plush are just decoration */
+  /** charms, photocards, the matcha cup and the plush are just decoration */
   const pinColor = item.kind === 'ticket' ? '#8ea7c6' : '#e8b8ad'
-  const decor = item.kind === 'keychain' || item.kind === 'matcha' || item.kind === 'plush'
+  const decor = item.kind === 'keychain' || item.kind === 'matcha' || item.kind === 'plush' || item.kind === 'photocard'
 
   return (
     <div

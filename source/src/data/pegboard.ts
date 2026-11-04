@@ -77,20 +77,20 @@ export const pegItems: PegItem[] = [
   {
     id: 'pc-1', kind: 'photocard', mount: 'hang', rotate: -3,
     d: { x: 67, y: 7, w: 8 }, m: { x: 15, y: 19.5, w: 17 },
-    member: 'ZB1', colors: ['#cfe0f5', '#b9a6e3'],
-    title: 'ZEROBASEONE', note: 'ZEROBASEONE photocard, in a toploader of course.',
+    member: 'ZEROBASEONE', colors: ['#cfe0f5', '#b9a6e3'],
+    title: 'ZEROBASEONE', note: '',
   },
   {
     id: 'pc-2', kind: 'photocard', mount: 'hang', rotate: 2,
     d: { x: 77, y: 7, w: 8 }, m: { x: 37, y: 19.5, w: 17 },
-    member: 'ZEROBASEONE', colors: ['#c7dcf0', '#e6eef9'],
-    title: 'ZEROBASEONE', note: 'Another ZEROBASEONE photocard for the collection.',
+    member: 'BOYNEXTDOOR', colors: ['#c7dcf0', '#e6eef9'],
+    title: 'BOYNEXTDOOR', note: '',
   },
   {
     id: 'pc-3', kind: 'photocard', mount: 'hang', rotate: -1.5,
     d: { x: 87, y: 7, w: 8 }, m: { x: 59, y: 19.5, w: 17 },
-    member: 'ZB1', colors: ['#f3c9d6', '#cfe0f5'],
-    title: 'ZEROBASEONE group card', note: 'A ZEROBASEONE group photocard. Toploader, always.',
+    member: 'AND2BLE', colors: ['#f3c9d6', '#cfe0f5'],
+    title: 'AND2BLE', note: '',
   },
   {
     id: 'lightstick', kind: 'lightstick', mount: 'rest', rotate: -9,
