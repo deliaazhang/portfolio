@@ -15,6 +15,16 @@ const STYLE: Record<string, { strap: string; badge: string; ink: string; short: 
   'UBC Visual Cognition Lab': { strap: '#8fa284', badge: '#e3e9dc', ink: '#3e5236', short: 'VIS COG LAB' },
   'University of British Columbia': { strap: '#d8b35e', badge: '#f6ecd2', ink: '#6b5321', short: 'UBC' },
 }
+/** ✎ badge logos (in /public/logos) */
+const LOGO: Record<string, string> = {
+  'UBC UX Hub': 'logos/uxhub.webp',
+  'WiDS@UBC': 'logos/wids.webp',
+  HappyVV: 'logos/happyvv.webp',
+  'UBC Arts Undergraduate Society': 'logos/aus.webp',
+  'UBC Visual Cognition Lab': 'logos/viscog.webp',
+  'University of British Columbia': 'logos/ubc.webp',
+}
+
 const fallback = { strap: '#9a968c', badge: '#efebe1', ink: '#2b2a27', short: '' }
 
 function Lanyard({ x, i }: { x: (typeof experience)[number]; i: number }) {
@@ -68,7 +78,7 @@ function Lanyard({ x, i }: { x: (typeof experience)[number]; i: number }) {
                 {s.short || x.org}
               </p>
               <div className="mt-3 aspect-square w-[46%] overflow-hidden rounded-[8px] bg-white/70 ring-2 ring-white/80" aria-hidden>
-                <img src="photos/delia.webp" alt="" className="h-full w-full origin-[56%_30%] scale-[2.2] object-cover" loading="lazy" draggable={false} />
+                <img src={LOGO[x.org] ?? 'photos/delia.webp'} alt="" className="h-full w-full object-cover" loading="lazy" draggable={false} />
               </div>
               <p className="mt-auto text-[0.62rem] uppercase tracking-[0.16em] opacity-60">{site.name}</p>
               <p className="mt-1 text-[1.02rem] font-medium leading-tight">{x.role}</p>
