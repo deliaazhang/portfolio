@@ -41,7 +41,6 @@ export type PegItem = Base &
     | { kind: 'matcha' }
   )
 
-const friends = (alt: string, colors: [string, string, string]): Pic => ({ alt, scene: 'friends', colors })
 
 export const pegItems: PegItem[] = [
   // ── polaroids on the string ─────────────────────
@@ -144,16 +143,16 @@ export const pegItems: PegItem[] = [
   {
     id: 'pola-5', kind: 'polaroid', mount: 'tape', rotate: -5,
     d: { x: 10, y: 78, w: 10 }, m: { x: 16, y: 78, w: 22 },
-    photo: friends('Placeholder — me and my twin', ['#e2e9f2', '#8ea7c6', '#e8b8ad']),
-    caption: 'me + my twin',
-    title: 'me + my twin', note: '[Edit me] Built-in best friend since day one.',
+    photo: { src: 'pegboard/sunset-lookout.webp', alt: 'Delia looking back over her shoulder at a hilltop sunset above the city', scene: 'sunset', colors: ['#e2e9f2', '#8ea7c6', '#e8b8ad'] },
+    caption: 'sunset chaser',
+    title: 'sunset chaser', note: 'Climbed up for the view and stayed until the sun went down.',
   },
   {
     id: 'pola-6', kind: 'polaroid', mount: 'tape', rotate: 4,
     d: { x: 22, y: 80, w: 10 }, m: null,
-    photo: friends('Placeholder — family photo', ['#f4e6d4', '#d98c6a', '#8fa284']),
-    caption: 'family ♡',
-    title: 'family', note: '[Edit me] The loud dinners and the people who cheered me on from the start.',
+    photo: { src: 'pegboard/paragliding.webp', alt: 'Tandem paragliding high above a town, a river and snowy mountains', scene: 'snow', colors: ['#f4e6d4', '#d98c6a', '#8fa284'] },
+    caption: 'paragliding!!',
+    title: 'paragliding!!', note: 'Flying over the mountains. Terrifying for about ten seconds, then the best view of my life.',
   },
   {
     id: 'note', kind: 'note', mount: 'pin', rotate: -2,
@@ -175,7 +174,7 @@ export const pegItems: PegItem[] = [
   {
     id: 'frame', kind: 'frame', mount: 'stand', rotate: 3,
     d: { x: 89, y: 91.5, w: 9 }, m: null,
-    photo: friends('Placeholder — a framed photo with friends', ['#eef0e2', '#a9bb6c', '#c79f78']),
-    title: 'framed favourite', note: '[Edit me] The one photo that earned a real frame.',
+    photo: { src: 'pegboard/paris-eiffel.webp', alt: 'Delia in front of the Eiffel Tower lit up gold at night', scene: 'city', colors: ['#eef0e2', '#a9bb6c', '#c79f78'] },
+    title: 'paris at night', note: 'The Eiffel Tower all lit up. Had to give this one a real frame.',
   },
 ]
