@@ -530,7 +530,7 @@ export function Pegboard() {
         </motion.h2>
         <div className="max-w-sm">
           <p className="text-[1.05rem] leading-relaxed text-ink-soft">
-            there’s more to me than design and data. here are some of the little things that make me, me.
+            there’s more to me than design and data. here’s a little glimpse into the things that make me who i am ♡
           </p>
           <p className="mt-3 font-mono text-[0.7rem] tracking-wide text-ink-faint">
             {desktop ? 'hover & click' : 'tap'} anything on the board · try the lightstick
