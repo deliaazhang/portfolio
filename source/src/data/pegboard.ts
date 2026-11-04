@@ -48,30 +48,30 @@ export const pegItems: PegItem[] = [
   {
     id: 'pola-1', kind: 'polaroid', mount: 'clip', rotate: -6,
     d: { x: 11, y: 10.5, w: 10.5 }, m: { x: 14, y: 4.5, w: 22 },
-    photo: friends('Placeholder — me and my best friends', ['#f6e3d3', '#e8b8ad', '#8fa284']),
+    photo: { src: 'pegboard/sunset-girls.webp', alt: 'Delia and four friends smiling at a sunset patio by the water', scene: 'friends', colors: ['#f6e3d3', '#e8b8ad', '#8fa284'] },
     caption: 'my girls ♡',
-    title: 'my girls', note: '[Edit me] The friends who have seen every version of me and stayed anyway.',
+    title: 'my girls', note: 'Sunset, good company and everyone talking at once. My favourite kind of evening.',
   },
   {
     id: 'pola-2', kind: 'polaroid', mount: 'clip', rotate: 4,
     d: { x: 23.5, y: 13, w: 10.5 }, m: { x: 38, y: 5.5, w: 22 },
-    photo: { alt: 'Placeholder — a café date', scene: 'cafe', colors: ['#e9dcc6', '#c79f78', '#7b5a43'] },
-    caption: 'café hopping',
-    title: 'café hopping', note: '[Edit me] Our unofficial tradition: a new café every weekend, rated very seriously.',
+    photo: { src: 'pegboard/nagocha-matcha.webp', alt: 'Iced matcha in a ceramic bowl on a wooden tray at Nagocha', scene: 'matcha', colors: ['#e9dcc6', '#c79f78', '#7b5a43'] },
+    caption: 'matcha hunting',
+    title: 'matcha hunting', note: 'Iced matcha in a bowl at Nagocha. Always on the search for the next good matcha spot.',
   },
   {
     id: 'pola-3', kind: 'polaroid', mount: 'clip', rotate: -3,
     d: { x: 36, y: 13.5, w: 10.5 }, m: { x: 62, y: 5.5, w: 22 },
-    photo: friends('Placeholder — concert night with friends', ['#2f3446', '#c4a7e0', '#8ea7c6']),
-    caption: 'concert night!!',
-    title: 'concert night', note: '[Edit me] Lost my voice, found my people. Worth every second in line.',
+    photo: { src: 'pegboard/hoi-an-boat.webp', alt: 'Delia and a friend in conical hats in a basket boat in Hoi An', scene: 'friends', colors: ['#2f3446', '#c4a7e0', '#8ea7c6'] },
+    caption: 'hoi an',
+    title: 'hoi an', note: 'Basket boat ride in Hoi An, conical hats and all.',
   },
   {
     id: 'pola-4', kind: 'polaroid', mount: 'clip', rotate: 5,
     d: { x: 48.5, y: 11.5, w: 10.5 }, m: { x: 86, y: 4.5, w: 22 },
-    photo: { alt: 'Placeholder — a trip together', scene: 'sunset', colors: ['#f6c89a', '#e58e73', '#8b6d8f'] },
-    caption: 'road trip ’25',
-    title: 'road trip', note: '[Edit me] Too many snacks, one aux cord, zero plans. Perfect.',
+    photo: { src: 'pegboard/ha-giang-road.webp', alt: 'A motorbike on a winding road through green mountains in Ha Giang', scene: 'sunset', colors: ['#f6c89a', '#e58e73', '#8b6d8f'] },
+    caption: 'ha giang loop',
+    title: 'ha giang loop', note: 'Mountains on every side and the road winding through them.',
   },
 
   // ── k-pop corner ────────────────────────────────
@@ -137,9 +137,9 @@ export const pegItems: PegItem[] = [
   {
     id: 'postcard', kind: 'postcard', mount: 'pin', rotate: 5,
     d: { x: 88.5, y: 46, w: 13 }, m: { x: 83, y: 27, w: 28 },
-    photo: { alt: 'Placeholder — a postcard view', scene: 'city', colors: ['#d7e2ee', '#8ea7c6', '#4f6d94'] },
-    from: '[somewhere]',
-    title: 'a postcard', note: '[Edit me] From a trip I still think about. Where it is and who sent it.',
+    photo: { src: 'pegboard/postcard-brooklyn.webp', alt: 'Vintage-style Greetings From Brooklyn, New York postcard', scene: 'city', colors: ['#d7e2ee', '#8ea7c6', '#4f6d94'] },
+    from: 'brooklyn',
+    title: 'greetings from brooklyn', note: 'A little postcard from New York.',
   },
   {
     id: 'pola-5', kind: 'polaroid', mount: 'tape', rotate: -5,
@@ -157,10 +157,10 @@ export const pegItems: PegItem[] = [
   },
   {
     id: 'note', kind: 'note', mount: 'pin', rotate: -2,
-    d: { x: 37, y: 77, w: 13.5 }, m: { x: 43, y: 79, w: 26 },
+    d: { x: 37.5, y: 76, w: 16.5 }, m: { x: 43, y: 79, w: 26 },
     heading: 'currently obsessed with',
-    lines: ['[a song]', '[a show]', 'iced matcha (still)'],
-    title: 'currently obsessed with', note: '[Edit me] Swap these for whatever you are into right now.',
+    lines: ['Never Let Go - LNGSHOT', 'Where the Mask Ends', 'Molly Tea!!'],
+    title: 'currently obsessed with', note: 'On repeat: Never Let Go by LNGSHOT. Watching: Where the Mask Ends. Drinking: Molly Tea!!',
   },
   {
     id: 'plush', kind: 'plush', mount: 'stand',

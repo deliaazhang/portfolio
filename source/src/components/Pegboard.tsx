@@ -210,6 +210,11 @@ function Keychain({ variant }: { variant: KeychainVariant }) {
 }
 
 function Postcard({ item }: { item: Extract<PegItem, { kind: 'postcard' }> }) {
+  if (item.photo.src) {
+    return (
+      <img src={item.photo.src} alt="" draggable={false} className="block w-full rounded-[2px] shadow-[inset_0_0_0_1px_rgba(0,0,0,.04)]" />
+    )
+  }
   return (
     <div className="relative bg-[#fffdf8] p-[4cqw]">
       <div className="relative aspect-[3/2] overflow-hidden">
@@ -233,7 +238,7 @@ function NoteCard({ item }: { item: Extract<PegItem, { kind: 'note' }> }) {
       <p className="pl-[3cqw] font-mono text-[5cqw] uppercase tracking-[0.14em] text-ink-faint">{item.heading}</p>
       <ul className="mt-[2cqw] pl-[3cqw]">
         {item.lines.map((l) => (
-          <li key={l} className="font-mono text-[6.2cqw] leading-[11.6cqw] text-ink">
+          <li key={l} className="whitespace-nowrap font-mono text-[5.3cqw] leading-[11.6cqw] text-ink">
             · {l}
           </li>
         ))}
@@ -353,6 +358,9 @@ function BoardItem({
   const swing = swings(item.mount)
   const origin = item.mount === 'stand' ? '50% 100%' : swing ? '50% 0%' : '50% 30%'
   const isStick = item.kind === 'lightstick'
+  /** charms, the matcha cup and the plush are just decoration */
+  const pinColor = item.kind === 'ticket' ? '#8ea7c6' : '#e8b8ad'
+  const decor = item.kind === 'keychain' || item.kind === 'matcha' || item.kind === 'plush'
 
   return (
     <div
@@ -360,6 +368,32 @@ function BoardItem({
       style={{ left: `${pos.x}%`, top: `${pos.y}%`, width: `${pos.w}%`, zIndex: item.mount === 'clip' ? 3 : 2 }}
     >
       {item.mount === 'hang' && <Peg />}
+      {decor ? (
+      <motion.div
+        aria-hidden
+        className="@container relative block w-full cursor-default"
+        style={{ transformOrigin: origin, filter: shadow }}
+        initial={reduce ? false : { opacity: 0, y: -18, rotate: swing ? r + 9 : r }}
+        animate={show ? { opacity: 1, y: 0, rotate: r } : undefined}
+        transition={{
+          opacity: { duration: 0.3, delay: i * 0.05 },
+          y: { type: 'spring', stiffness: 260, damping: 18, delay: i * 0.05 },
+          rotate: { type: 'spring', stiffness: 90, damping: swing ? 5 : 20, delay: i * 0.05 },
+        }}
+        whileHover={
+          reduce
+            ? undefined
+            : swing
+              ? { rotate: [r, r + 7, r - 5, r + 2.5, r], transition: { duration: 1.3, ease: 'easeInOut' } }
+              : { y: -5, scale: 1.035, rotate: r * 0.4, transition: { type: 'spring', stiffness: 300, damping: 18 } }
+        }
+      >
+        {item.mount === 'clip' && <Clothespin />}
+        {item.mount === 'pin' && <PushPin color={pinColor} />}
+        {item.mount === 'tape' && <Tape tint={i % 2 ? 'bg-blush/70' : 'bg-sage-tint/90'} />}
+        <ItemArt item={item} lit={lit} />
+      </motion.div>
+      ) : (
       <motion.button
         type="button"
         onClick={() => onOpen(item)}
@@ -385,10 +419,11 @@ function BoardItem({
         whileTap={{ scale: 0.97 }}
       >
         {item.mount === 'clip' && <Clothespin />}
-        {item.mount === 'pin' && <PushPin color={item.kind === 'ticket' ? '#8ea7c6' : '#e8b8ad'} />}
+        {item.mount === 'pin' && <PushPin color={pinColor} />}
         {item.mount === 'tape' && <Tape tint={i % 2 ? 'bg-blush/70' : 'bg-sage-tint/90'} />}
         <ItemArt item={item} lit={lit} />
       </motion.button>
+      )}
     </div>
   )
 }
@@ -474,7 +509,7 @@ function DetailCard({ item, onClose }: { item: PegItem; onClose: () => void }) {
         <div className="my-6 flex justify-center">
           {photo ? (
             <div className="w-[80%] rotate-2 bg-white p-2 pb-8 shadow-[0_12px_24px_-12px_rgba(0,0,0,.35)]">
-              <div className="aspect-[4/3] overflow-hidden">
+              <div className={item.kind === 'postcard' ? 'overflow-hidden' : 'aspect-[4/3] overflow-hidden'}>
                 <PhotoView photo={photo} />
               </div>
             </div>
