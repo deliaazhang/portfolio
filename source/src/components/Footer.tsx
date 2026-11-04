@@ -46,7 +46,6 @@ export function Footer() {
         <MatchaRun />
 
         <div className="mt-20 flex flex-col gap-3 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-ink-faint sm:flex-row sm:items-center sm:justify-between">
-          <p>designed &amp; made by delia</p>
           <p className="flex items-center gap-3">
             <span className="font-cn normal-case tracking-[0.3em]">{site.chineseName}</span>
             <span>© {new Date().getFullYear()}</span>
