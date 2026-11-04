@@ -30,6 +30,53 @@ export function SceneArt({ scene, colors }: { scene: Scene; colors: [string, str
   const [a, b, c] = colors
   const common = { viewBox: '0 0 320 220', preserveAspectRatio: 'xMidYMid slice', className: 'h-full w-full' }
   switch (scene) {
+    case 'newyork':
+      return (
+        <svg {...common}>
+          <defs>
+            <linearGradient id="ny-sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="#c9d8ee" />
+              <stop offset=".6" stopColor="#f6dfe4" />
+              <stop offset="1" stopColor="#fbe9d6" />
+            </linearGradient>
+          </defs>
+          <rect width="320" height="220" fill="url(#ny-sky)" />
+          <circle cx="254" cy="58" r="22" fill="#fff6e4" opacity=".9" />
+          <path d="M30 40 q10 -8 20 0 q8 -6 16 2 M200 30 q8 -6 16 0 q6 -4 12 2" stroke="#fff" strokeWidth="4" fill="none" strokeLinecap="round" opacity=".9" />
+          {/* back skyline */}
+          {[[8,120,26],[36,98,22],[60,132,30],[96,104,20],[214,110,26],[242,92,22],[266,126,28],[296,106,24]].map(([x,h,w],i)=>(
+            <rect key={i} x={x} y={190-h} width={w} height={h} fill="#b9c7e2" opacity=".85" />
+          ))}
+          {/* empire state building */}
+          <g fill="#8ea7c6">
+            <rect x="136" y="70" width="48" height="120" />
+            <rect x="144" y="52" width="32" height="20" />
+            <rect x="151" y="38" width="18" height="16" />
+            <rect x="157" y="22" width="6" height="18" />
+            <rect x="159" y="8" width="2" height="16" />
+          </g>
+          {Array.from({ length: 8 }).map((_, r) => (
+            <g key={r}>{[142,152,162,172].map((x)=>(<rect key={x} x={x} y={80 + r * 13} width="5" height="7" fill="#fff6e4" opacity=".75" />))}</g>
+          ))}
+          {/* statue of liberty */}
+          <g fill="#9fc7b8">
+            <path d="M92 190 L96 150 L104 150 L108 190Z" />
+            <rect x="94" y="138" width="12" height="14" rx="3" />
+            <circle cx="100" cy="132" r="6" />
+            <path d="M94 128 L100 120 L106 128Z" />
+            <rect x="104" y="112" width="3" height="20" />
+            <path d="M102 112 q3 -8 7 0Z" fill="#f2c46d" />
+          </g>
+          {/* water + front buildings */}
+          <rect x="0" y="186" width="320" height="34" fill="#a9c0dc" />
+          <path d="M0 196 q20 -4 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" stroke="#fff" strokeWidth="2" fill="none" opacity=".6" />
+          {[[196,58,22],[222,44,20],[248,66,24],[20,50,24],[48,40,18]].map(([x,h,w],i)=>(
+            <rect key={'f'+i} x={x} y={190-h} width={w} height={h} fill="#e8b8ad" opacity=".9" />
+          ))}
+          <path d="M0 210 L320 210" stroke="#fff" strokeWidth="1.5" opacity=".5" />
+          <text x="300" y="214" textAnchor="end" fontFamily="IBM Plex Mono, monospace" fontSize="8" fill="#4f6d94" opacity=".7">♡ NYC</text>
+        </svg>
+      )
     case 'friends':
       return (
         <svg {...common}>

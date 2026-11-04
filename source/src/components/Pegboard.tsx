@@ -219,7 +219,13 @@ function Postcard({ item }: { item: Extract<PegItem, { kind: 'postcard' }> }) {
     <div className="relative bg-[#fffdf8] p-[4cqw]">
       <div className="relative aspect-[3/2] overflow-hidden">
         <PhotoView photo={item.photo} showTag={false} />
-        <p className="absolute bottom-[4cqw] left-[5cqw] text-white [text-shadow:0_1px_4px_rgba(0,0,0,.35)]">
+        <p
+          className={`absolute left-[5cqw] ${
+            item.photo.scene === 'newyork'
+              ? 'top-[4cqw] text-[#2f4a6e] [text-shadow:0_1px_0_rgba(255,255,255,.9)]'
+              : 'bottom-[4cqw] text-white [text-shadow:0_1px_4px_rgba(0,0,0,.35)]'
+          }`}
+        >
           <span className="block font-mono text-[4.4cqw] uppercase tracking-[0.2em]">greetings from</span>
           <span className="serif-i block text-[12cqw] leading-none">{item.from}</span>
         </p>
@@ -510,7 +516,7 @@ function DetailCard({ item, onClose }: { item: PegItem; onClose: () => void }) {
           {photo ? (
             <div className="w-[80%] rotate-2 bg-white p-2 pb-8 shadow-[0_12px_24px_-12px_rgba(0,0,0,.35)]">
               <div className={item.kind === 'postcard' ? 'overflow-hidden' : 'aspect-[4/3] overflow-hidden'}>
-                <PhotoView photo={photo} />
+                <PhotoView photo={photo} showTag={photo.scene !== 'newyork'} />
               </div>
             </div>
           ) : (

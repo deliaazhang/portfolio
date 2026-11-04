@@ -4,7 +4,7 @@
  * To use a real photo: put the file in /public/photos/ and set `src: 'photos/my-photo.jpg'`.
  * While `src` is empty, a little illustrated placeholder (`scene` + `colors`) is drawn instead.
  */
-export type Scene = 'cafe' | 'matcha' | 'sunset' | 'city' | 'flower' | 'snow' | 'desk' | 'dinner' | 'friends'
+export type Scene = 'cafe' | 'matcha' | 'sunset' | 'city' | 'flower' | 'snow' | 'desk' | 'dinner' | 'friends' | 'newyork'
 
 /** Anything that can be shown as a photo: a real image (`src`) or an illustrated placeholder. */
 export type Pic = { src?: string; alt: string; scene: Scene; colors: [string, string, string] }

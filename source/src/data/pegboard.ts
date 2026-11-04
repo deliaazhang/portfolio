@@ -101,14 +101,14 @@ export const pegItems: PegItem[] = [
   {
     id: 'ticket', kind: 'ticket', mount: 'pin', rotate: 3,
     d: { x: 70, y: 44, w: 16 }, m: { x: 56, y: 46.5, w: 58 },
-    event: '[CONCERT NAME]', detail: 'WORLD TOUR · [CITY] · 2025', seat: 'SEC A · ROW 12 · SEAT 7',
-    title: 'ticket stub', note: '[Edit me] The concert, who I went with, and the song that made me cry.',
+    event: 'BTS', detail: 'WORLD TOUR · TORONTO', seat: 'SEC A · ROW 12 · SEAT 7',
+    title: 'bts world tour', note: 'BTS world tour in Toronto. Lightstick fully charged, voice fully gone.',
   },
   {
     id: 'album', kind: 'album', mount: 'stand', rotate: -4,
     d: { x: 60, y: 91.5, w: 11 }, m: { x: 72, y: 96.8, w: 24 },
-    name: '[album]', artist: '[artist]', colors: ['#cfe0f2', '#f3c9d6'],
-    title: 'favourite album', note: '[Edit me] The album I have on repeat right now. Track 3, specifically.',
+    name: 'GUTS', artist: 'olivia rodrigo', colors: ['#d9c8f0', '#b79be0'],
+    title: 'GUTS — olivia rodrigo', note: 'Olivia Rodrigo’s GUTS, on repeat.',
   },
 
   // ── keychains ──────────────────────────────────
@@ -137,9 +137,9 @@ export const pegItems: PegItem[] = [
   {
     id: 'postcard', kind: 'postcard', mount: 'pin', rotate: 5,
     d: { x: 88.5, y: 46, w: 13 }, m: { x: 83, y: 27, w: 28 },
-    photo: { src: 'pegboard/postcard-brooklyn.webp', alt: 'Vintage-style Greetings From Brooklyn, New York postcard', scene: 'city', colors: ['#d7e2ee', '#8ea7c6', '#4f6d94'] },
-    from: 'brooklyn',
-    title: 'greetings from brooklyn', note: 'A little postcard from New York.',
+    photo: { alt: 'Illustrated pastel postcard of the New York skyline with the Empire State Building and the Statue of Liberty', scene: 'newyork', colors: ['#f6dfe4', '#c9d8ee', '#8ea7c6'] },
+    from: 'new york',
+    title: 'greetings from new york', note: 'A little postcard from New York ♡',
   },
   {
     id: 'pola-5', kind: 'polaroid', mount: 'tape', rotate: -5,
