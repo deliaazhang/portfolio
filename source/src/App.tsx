@@ -8,6 +8,7 @@ import { Projects } from './components/Projects'
 import { About } from './components/About'
 import { Pegboard } from './components/Pegboard'
 import { Ticker } from './components/Ticker'
+import { OtherWork } from './components/OtherWork'
 import { Footer } from './components/Footer'
 import { CameraGallery } from './components/CameraGallery'
 import { ProjectDetail } from './components/ProjectDetail'
@@ -104,6 +105,7 @@ export default function App() {
                   <Hero delay={heroDelay.current} cameraAway={gallery?.origin === 'hero'} />
                   <Ticker />
                   <Projects onOpen={openProject} />
+                  <OtherWork />
                 </main>
               ) : route.name === 'about' ? (
                 <AboutPage />
