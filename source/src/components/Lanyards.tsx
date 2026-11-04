@@ -77,7 +77,7 @@ function Lanyard({ x, i }: { x: (typeof experience)[number]; i: number }) {
               <p className="mt-3 font-mono text-[0.6rem] font-medium uppercase tracking-[0.2em]" style={{ color: s.strap === '#d8b35e' ? s.ink : s.strap }}>
                 {s.short || x.org}
               </p>
-              <div className="mt-3 aspect-square w-[46%] overflow-hidden rounded-[8px] bg-white/70 ring-2 ring-white/80" aria-hidden>
+              <div className="mx-auto mt-3 aspect-square w-[52%] overflow-hidden rounded-[10px] bg-white ring-2 ring-white/80" aria-hidden>
                 <img src={LOGO[x.org] ?? 'photos/delia.webp'} alt="" className="h-full w-full object-cover" loading="lazy" draggable={false} />
               </div>
               <p className="mt-auto text-[0.62rem] uppercase tracking-[0.16em] opacity-60">{site.name}</p>
