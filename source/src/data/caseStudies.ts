@@ -30,7 +30,7 @@ export const stories: Record<string, Story> = {
   wehappy: {
     tags: ['product design', 'internship', 'community', 'web design'],
     tldr: [
-      'WeHappy is a bilingual social and lifestyle app for Chinese communities around the world. During my internship at HappyVV I worked across three pieces: a community feature, a city check-in (打卡) website, and a website redesign for Western audiences.',
+      'WeHappy is a bilingual social and lifestyle app for Chinese communities around the world. During my internship at HappyVV I worked on four separate projects: an app redesign, a website redesign for Western audiences, a Discord analysis that shaped WeHappy’s community feature, and a 打卡 city check-in app.',
       'I analyzed how Discord organizes communities so the team could design WeHappy’s own version. That feature is now in the live app.',
     ],
     origin: [
@@ -71,13 +71,13 @@ export const stories: Record<string, Story> = {
   },
 
   correlation: {
-    tags: ['research', 'data visualization', 'HCI', 'psychophysics'],
+    tags: ['research', 'data visualization', 'HCI'],
     tldr: [
       'At UBC’s Visual Cognition Lab I worked on the Correlation Project, which studies how people perceive correlation in scatterplots.',
-      'My condition tested whether point opacity changes how precisely people can judge correlation. I helped run participants, followed a counterbalanced design, and summarized the results.',
+      'I worked on a condition about point opacity: whether making dots more or less transparent changes how precisely people judge correlation. I helped run participant sessions and organize the results.',
     ],
     origin: [
-      'Scatterplots are one of the most common charts, and we often assume people read them accurately. Research shows our sense of correlation is predictable but not perfect: it follows patterns similar to Weber’s law.',
+      'Scatterplots are one of the most common charts, and we often assume people read them accurately. Research shows our sense of correlation is predictable but not perfect.',
       'Designers change how points look all the time, for example making them transparent so overlapping dots stay visible. The question is whether that design choice quietly changes what people see.',
     ],
     questions: [
@@ -87,24 +87,19 @@ export const stories: Record<string, Story> = {
     ],
     decisions: [
       {
+        question: 'Why study opacity?',
+        choice: 'Test a design choice people make every day.',
+        why: 'Transparency is a common fix for overlapping points, so it matters whether it changes how people read the chart.',
+      },
+      {
         question: 'How do we measure “seeing correlation”?',
-        choice: 'Two tasks: estimation (Stevens) and discrimination (JND).',
-        why: 'Estimation tells us how accurate people are; discrimination tells us how small a difference they can notice. Together they separate accuracy from precision.',
+        choice: 'Two tasks: estimation and discrimination (JND).',
+        why: 'Estimation shows how accurate people are; discrimination shows how small a difference they can notice. Together they separate accuracy from precision.',
       },
       {
         question: 'How do we avoid order effects?',
-        choice: 'Counterbalance by rotating the starting condition: a→e, then b→a, and so on.',
+        choice: 'Counterbalance by rotating which condition each participant starts with.',
         why: 'People tend to do worst on their first condition and best on their last. Rotating the order stops any one condition from always getting the worst data.',
-      },
-      {
-        question: 'How many participants?',
-        choice: 'At least 40 per condition, running 45–50.',
-        why: 'Running a few extra leaves room to exclude participants without losing statistical power.',
-      },
-      {
-        question: 'How do we know the experiment works before real participants?',
-        choice: 'Pilot it on myself, then a friend, with the project lead observing.',
-        why: 'Dry runs catch confusing instructions and bugs before they cost real data.',
       },
     ],
     reflections: [
@@ -112,6 +107,7 @@ export const stories: Record<string, Story> = {
       'Research rewards patience and care: most of the work is making sure the data can be trusted.',
     ],
   },
+
   arctrail: {
     tags: ['UX/UI design', 'community', 'web app', 'branding'],
     tldr: [

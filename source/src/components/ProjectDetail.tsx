@@ -10,7 +10,7 @@ import { SkintellectFlow } from './prototypes/SkintellectFlow'
 import { HerschelExplorer } from './prototypes/HerschelExplorer'
 import { WeHappyCheckin } from './prototypes/WeHappyCheckin'
 import { CorrelationTask } from './prototypes/CorrelationTask'
-import { JndChart } from './JndChart'
+import { OpacityStimuli } from './OpacityStimuli'
 
 const ease = [0.2, 0.7, 0.2, 1] as const
 
@@ -25,6 +25,7 @@ const PROTOTYPES: Record<PrototypeKey, () => ReactNode> = {
 
 const SECTIONS = [
   { id: 'tldr', label: 'tl;dr' },
+  { id: 'work', label: 'the work' },
   { id: 'origin', label: 'where it started' },
   { id: 'questions', label: 'questions' },
   { id: 'process', label: 'process' },
@@ -170,7 +171,7 @@ export function ProjectDetail({ slug, onBack, onOpen }: { slug: string; onBack: 
         >
           <div className="mx-auto max-w-[900px] border-y border-line bg-paper/95 px-5 backdrop-blur-md sm:rounded-full sm:border sm:px-2">
             <ul className="no-scrollbar flex gap-1 overflow-x-auto py-2">
-              {SECTIONS.map((sec) => (
+              {SECTIONS.filter((sec) => sec.id !== 'work' || p.parts).map((sec) => (
                 <li key={sec.id} className="shrink-0">
                   <button
                     type="button"
@@ -233,6 +234,41 @@ export function ProjectDetail({ slug, onBack, onOpen }: { slug: string; onBack: 
                 ))}
             </dl>
           </Section>
+
+          {/* the work: separate pieces inside one project */}
+          {p.parts && (
+            <Section id="work" label={`the work · ${p.parts.length} projects`} accent={p.accent}>
+              <ol className="space-y-14">
+                {p.parts.map((part, i) => (
+                  <Reveal key={part.title}>
+                    <li className="grid gap-6 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:items-center md:gap-10">
+                      <div className={i % 2 ? 'md:order-2' : ''}>
+                        <p className="font-mono text-[0.72rem] text-ink-faint">
+                          0{i + 1} <span className="mx-1">·</span> {part.kind}
+                        </p>
+                        <h3 className="serif-i mt-2 text-[clamp(1.8rem,3.2vw,2.4rem)] leading-[1.05] text-ink">{part.title}</h3>
+                        <p className="mt-3 text-[1rem] leading-relaxed text-ink-soft">{part.body}</p>
+                      </div>
+                      <div
+                        className={`rounded-[18px] p-4 sm:p-5 ${i % 2 ? 'md:order-1' : ''} ${part.phones ? 'grid grid-cols-3 gap-3' : 'grid gap-3'}`}
+                        style={{ background: p.tint }}
+                      >
+                        {part.images.map((src) => (
+                          <img
+                            key={src}
+                            src={src}
+                            alt={`${part.title} screen`}
+                            loading="lazy"
+                            className={`w-full shadow-[0_14px_24px_-14px_rgba(43,42,39,.45)] ${part.phones ? 'rounded-[14px]' : 'rounded-[10px]'}`}
+                          />
+                        ))}
+                      </div>
+                    </li>
+                  </Reveal>
+                ))}
+              </ol>
+            </Section>
+          )}
 
           {/* where it started */}
           <Section id="origin" label="where it started" accent={p.accent}>
@@ -335,9 +371,9 @@ export function ProjectDetail({ slug, onBack, onOpen }: { slug: string; onBack: 
           {/* final product */}
           <Section id="final" label="final product" accent={p.accent}>
             <Reveal>
-              <div className={`grid items-center gap-8 ${p.feature.chart ? '' : 'md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]'}`}>
-                {p.feature.chart === 'jnd' ? (
-                  <JndChart />
+              <div className={`grid items-center gap-8 ${p.feature.chart || !p.feature.image ? '' : 'md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]'}`}>
+                {p.feature.chart === 'stimuli' ? (
+                  <OpacityStimuli />
                 ) : (
                   p.feature.image && <img src={p.feature.image} alt={`${p.feature.name} feature screens`} className="w-full rounded-[18px] bg-paper-2" loading="lazy" />
                 )}
