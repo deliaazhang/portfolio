@@ -338,7 +338,7 @@ export const projects: Project[] = [
   {
     slug: 'herschel-wander',
     tint: 'linear-gradient(160deg,#e3e8f3 0%,#c3cde4 55%,#9fb0d6 100%)',
-    preview: { device: 'laptop', screens: ['screens/her-1.webp', 'screens/her-2.webp', 'screens/her-3.webp', 'screens/her-4.webp'], extras: ['screens/prod-1.webp', 'screens/prod-6.webp'] },
+    preview: { device: 'laptop', screens: ['figma/her-1.webp', 'figma/her-2.webp'], extras: ['screens/prod-1.webp', 'screens/prod-6.webp'] },
     prototype: { key: 'herschel', title: 'explore the wander line', hint: 'switch products and colourways, then tap the hotspots' },
     title: 'Herschel Wander',
     category: 'Brand + Web Redesign',
