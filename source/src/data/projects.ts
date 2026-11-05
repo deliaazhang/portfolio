@@ -169,7 +169,7 @@ export const projects: Project[] = [
   {
     slug: 'arctrail',
     tint: 'linear-gradient(160deg,#e4ecee 0%,#cfdcdf 55%,#b9ccd0 100%)',
-    preview: { device: 'laptop', screens: ['screens/arc-1.webp', 'screens/arc-2.webp', 'screens/arc-3.webp', 'screens/arc-4.webp', 'screens/arc-5.webp', 'screens/arc-6.webp'] },
+    preview: { device: 'laptop', screens: ['figma/at-2.webp', 'figma/at-3.webp', 'figma/at-4.webp', 'figma/at-5.webp', 'figma/at-6.webp', 'figma/at-7.webp', 'figma/at-8.webp', 'figma/at-9.webp', 'figma/at-10.webp'] },
     prototype: { key: 'arctrail', title: 'find your collaborators', hint: 'pick what you bring and what you need, then get matched' },
     title: 'Arc’Trail',
     category: 'UX/UI Design',
@@ -226,7 +226,7 @@ export const projects: Project[] = [
   {
     slug: 'roominate',
     tint: 'linear-gradient(160deg,#f1f3c6 0%,#c9e6b4 50%,#9fd9c9 100%)',
-    preview: { device: 'phones', screens: ['screens/room-4.webp','screens/room-3.webp','screens/room-5.webp','screens/room-6.webp','screens/room-7.webp','screens/room-2.webp','screens/room-1.webp'] },
+    preview: { device: 'phones', screens: ['figma/rm-1.webp', 'figma/rm-2.webp', 'figma/rm-3.webp', 'figma/rm-4.webp', 'figma/rm-5.webp', 'figma/rm-6.webp', 'figma/rm-7.webp', 'figma/rm-8.webp', 'figma/rm-9.webp', 'figma/rm-10.webp'] },
     prototype: { key: 'roominate', title: 'send an anonymous alert', hint: 'tap an alert and watch it land on your roommate’s phone' },
     title: 'roominate',
     category: 'Product Design',
@@ -282,7 +282,7 @@ export const projects: Project[] = [
   {
     slug: 'skintellect',
     tint: 'linear-gradient(160deg,#eef0e6 0%,#d7e0cc 55%,#b9c9ad 100%)',
-    preview: { device: 'phones', screens: ['screens/skin-1.webp','screens/skin-2.webp','screens/skin-4.webp','screens/skin-5.webp','screens/skin-6.webp','screens/skin-3.webp'] },
+    preview: { device: 'phones', screens: ['figma/sk-1.webp', 'figma/sk-2.webp', 'figma/sk-3.webp', 'figma/sk-4.webp', 'figma/sk-5.webp', 'figma/sk-6.webp', 'figma/sk-7.webp', 'figma/sk-8.webp', 'figma/sk-9.webp', 'figma/sk-10.webp', 'figma/sk-11.webp'] },
     prototype: { key: 'skintellect', title: 'build your routine', hint: 'choose your concerns, scan, and get a routine that fits your budget' },
     title: 'skintellect',
     category: 'UX Research + UI',

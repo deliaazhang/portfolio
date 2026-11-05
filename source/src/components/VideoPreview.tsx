@@ -26,7 +26,7 @@ const URLS: Record<string, string> = {
 }
 
 /** a soft tap ripple that fires shortly before the screen changes */
-function Ripple({ i, live, finger }: { i: number; live: boolean; finger: boolean }) {
+function Ripple({ i, live, finger, dur = SEG }: { i: number; live: boolean; finger: boolean; dur?: number }) {
   if (!live) return null
   const [x, y] = SPOTS[i % SPOTS.length]
   return (
@@ -36,7 +36,25 @@ function Ripple({ i, live, finger }: { i: number; live: boolean; finger: boolean
       style={{ left: `${x}%`, top: `${y}%` }}
       initial={{ scale: 0.3, opacity: 0 }}
       animate={{ scale: [0.3, 1, 1.25], opacity: [0, 0.85, 0] }}
-      transition={{ duration: 0.6, delay: SEG / 1000 - 0.75 }}
+      transition={{ duration: 0.6, delay: dur / 1000 - 0.75 }}
+    />
+  )
+}
+
+/** a screen that scrolls from top to bottom while it's showing, if it's taller than the frame */
+function ScrollShot({ src, of, live, dur }: { src: string; of: number; live: boolean; dur: number }) {
+  if (of <= 0.1) {
+    return <img src={src} alt="" draggable={false} className="absolute inset-0 h-full w-full object-cover object-top" />
+  }
+  return (
+    <motion.img
+      src={src}
+      alt=""
+      draggable={false}
+      className="absolute inset-x-0 top-0 h-auto w-full"
+      initial={{ y: '0%' }}
+      animate={{ y: live ? `-${of * 100}%` : '0%' }}
+      transition={{ duration: live ? (dur - 1500) / 1000 : 0.4, delay: live ? 0.7 : 0, ease: [0.45, 0.05, 0.25, 1] }}
     />
   )
 }
@@ -73,15 +91,32 @@ export function VideoPreview({ project, playing, size = 'card' }: { project: Pro
   const [i, setI] = useState(0)
   const [elapsed, setElapsed] = useState(0)
 
+  // measure each screen so tall pages can scroll and stay on screen longer
+  const [ratios, setRatios] = useState<Record<string, number>>({})
+  useEffect(() => {
+    if (device === 'viz') return
+    screens.forEach((u) => {
+      const im = new Image()
+      im.onload = () => setRatios((r) => (r[u] ? r : { ...r, [u]: im.naturalHeight / im.naturalWidth }))
+      im.src = u
+    })
+  }, [device, screens])
+  const frameRatio = device === 'laptop' ? 10 / 16 : 19.5 / 9
+  const overflow = (u?: string | null) => (u && ratios[u] ? Math.max(0, 1 - frameRatio / ratios[u]) : 0)
+  const durOf = (k: number) => (device !== 'viz' && overflow(screens[k]) > 0.1 ? 5200 : SEG)
+  const total = Array.from({ length: n }).reduce<number>((t, _, k) => t + durOf(k), 0)
+
   useEffect(() => {
     if (!live) return
-    const a = window.setInterval(() => setI((v) => (v + 1) % n), SEG)
+    const a = window.setTimeout(() => setI((v) => (v + 1) % n), durOf(i))
+    return () => window.clearTimeout(a)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [live, n, i, ratios])
+  useEffect(() => {
+    if (!live) return
     const b = window.setInterval(() => setElapsed((e) => e + 250), 250)
-    return () => {
-      window.clearInterval(a)
-      window.clearInterval(b)
-    }
-  }, [live, n])
+    return () => window.clearInterval(b)
+  }, [live])
   useEffect(() => {
     if (!playing) {
       setI(0)
@@ -139,20 +174,19 @@ export function VideoPreview({ project, playing, size = 'card' }: { project: Pro
             </div>}
             <div className="relative aspect-[16/10] overflow-hidden bg-white">
               <AnimatePresence initial={false}>
-                <motion.img
+                <motion.div
                   key={src}
-                  src={src!}
-                  alt=""
-                  draggable={false}
-                  className="absolute inset-0 h-full w-full object-cover object-top"
+                  className="absolute inset-0"
                   initial={{ opacity: 0, y: '3%' }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.55, ease: [0.2, 0.7, 0.2, 1] }}
-                />
+                >
+                  <ScrollShot src={src!} of={overflow(src)} live={live} dur={durOf(i)} />
+                </motion.div>
               </AnimatePresence>
               <Cursor i={i} live={live} />
-              <Ripple i={i} live={live} finger={false} />
+              <Ripple i={i} live={live} finger={false} dur={durOf(i)} />
             </div>
           </motion.div>
         </div>
@@ -182,19 +216,18 @@ export function VideoPreview({ project, playing, size = 'card' }: { project: Pro
             {/* the phone: frame and screen are one piece */}
             <div className="absolute inset-0 overflow-hidden rounded-[24px] bg-black shadow-[0_30px_60px_-18px_rgba(0,0,0,.6)] ring-[6px] ring-black/90">
               <AnimatePresence initial={false}>
-                <motion.img
+                <motion.div
                   key={src}
-                  src={src!}
-                  alt=""
-                  draggable={false}
-                  className="absolute inset-0 h-full w-full object-cover object-top"
+                  className="absolute inset-0 bg-white"
                   initial={{ x: '100%' }}
                   animate={{ x: '0%' }}
                   exit={{ x: '-28%', opacity: 0.4 }}
                   transition={{ duration: 0.55, ease: [0.32, 0.72, 0, 1] }}
-                />
+                >
+                  <ScrollShot src={src!} of={overflow(src)} live={live} dur={durOf(i)} />
+                </motion.div>
               </AnimatePresence>
-              <Ripple i={i} live={live} finger />
+              <Ripple i={i} live={live} finger dur={durOf(i)} />
               <span className="absolute left-1/2 top-[1.6%] z-10 h-[3%] w-[30%] -translate-x-1/2 rounded-full bg-black" aria-hidden />
               <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,.14),transparent_35%)]" aria-hidden />
             </div>
@@ -230,7 +263,7 @@ export function VideoPreview({ project, playing, size = 'card' }: { project: Pro
                 className="block h-full rounded-full bg-white"
                 style={{
                   width: k < i ? '100%' : k === i && live ? undefined : '0%',
-                  animation: k === i && live ? `video-fill ${SEG}ms linear forwards` : undefined,
+                  animation: k === i && live ? `video-fill ${durOf(k)}ms linear forwards` : undefined,
                 }}
               />
             </span>
@@ -241,7 +274,7 @@ export function VideoPreview({ project, playing, size = 'card' }: { project: Pro
             <svg viewBox="0 0 24 24" className="h-3 w-3" fill="currentColor" aria-hidden>
               {live ? <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" /> : <path d="M8 5.5v13l10.5-6.5z" />}
             </svg>
-            {fmt(elapsed)} / {fmt(n * SEG)}
+            {fmt(elapsed % total)} / {fmt(total)}
           </span>
           <span className="rounded-[3px] border border-white/40 px-1 text-[0.55rem]">HD</span>
         </div>
