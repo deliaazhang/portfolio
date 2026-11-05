@@ -1,7 +1,8 @@
 import { useRef, useState, type PointerEvent } from 'react'
 import { motion, useMotionValue, useSpring } from 'motion/react'
 import { projects, type Project } from '../data/projects'
-import { ProjectPreview, usePreviewPlaying } from './DevicePreview'
+import { usePreviewPlaying } from './DevicePreview'
+import { VideoPreview } from './VideoPreview'
 
 export function SectionLabel({ index, children }: { index: string; children: string }) {
   return (
@@ -31,7 +32,6 @@ function ProjectCard({ project, i, onOpen }: { project: Project; i: number; onOp
 
   return (
     <motion.article
-      className={i % 2 === 1 ? 'md:mt-28' : ''}
       initial={{ opacity: 0, y: 48 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -62,29 +62,10 @@ function ProjectCard({ project, i, onOpen }: { project: Project; i: number; onOp
           ref={(el) => {
             previewRef.current = el
           }}
-          className="relative aspect-[683/554] overflow-hidden rounded-[18px] shadow-[0_1px_0_rgba(255,255,255,.8)_inset,0_20px_40px_-28px_rgba(43,42,39,.4)]"
+          className="relative aspect-[16/11] overflow-hidden rounded-[18px] shadow-[0_1px_0_rgba(255,255,255,.8)_inset,0_20px_40px_-28px_rgba(43,42,39,.4)]"
           style={{ background: project.tint }}
         >
-          {/* soft light that follows the preview */}
-          <motion.div
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(255,255,255,.65),transparent_60%)]"
-            animate={{ opacity: playing ? 1 : 0.5, scale: playing ? 1.1 : 1 }}
-            transition={{ duration: 0.8 }}
-          />
-          <ProjectPreview project={project} playing={playing} />
-          {/* "now playing" chip */}
-          <motion.span
-            className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-white/75 px-2.5 py-1 font-mono text-[0.6rem] uppercase tracking-[0.16em] text-ink-soft backdrop-blur"
-            animate={{ opacity: playing ? 1 : 0.85 }}
-          >
-            <span className={`h-1.5 w-1.5 rounded-full ${playing ? 'animate-pulse bg-[#e0554f]' : 'bg-ink-faint'}`} />
-            {playing ? 'playing preview' : (
-              <>
-                <span className="[@media(pointer:coarse)]:hidden">hover to play</span>
-                <span className="hidden [@media(pointer:coarse)]:inline">preview</span>
-              </>
-            )}
-          </motion.span>
+          <VideoPreview project={project} playing={playing} />
           {/* cursor-following label (desktop) */}
           <motion.span
             className="pointer-events-none absolute left-0 top-0 hidden [@media(pointer:fine)]:block"

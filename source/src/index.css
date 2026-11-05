@@ -115,6 +115,10 @@ body {
   0%, 100% { transform: translateY(0) rotate(-0.6deg); }
   50% { transform: translateY(-7px) rotate(0.6deg); }
 }
+@keyframes video-fill {
+  from { width: 0%; }
+  to { width: 100%; }
+}
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }

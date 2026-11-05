@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { motion, useInView, useReducedMotion } from 'motion/react'
 import { projects, type PrototypeKey, type Project } from '../data/projects'
 import { stories } from '../data/caseStudies'
-import { ProjectPreview } from './DevicePreview'
+import { VideoPreview } from './VideoPreview'
 import { ProcessBoard } from './ProcessBoard'
 import { ArcTrailMatch } from './prototypes/ArcTrailMatch'
 import { RoominateAlerts } from './prototypes/RoominateAlerts'
@@ -74,9 +74,7 @@ function HeroReel({ project }: { project: Project }) {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.9, delay: 0.1, ease }}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,.7),transparent_62%)]" />
-      <ProjectPreview project={project} playing={inView && !reduce} size="hero" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-paper/80 to-transparent" />
+      <VideoPreview project={project} playing={inView && !reduce} size="hero" />
     </motion.div>
   )
 }
