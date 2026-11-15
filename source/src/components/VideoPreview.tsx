@@ -24,6 +24,7 @@ const SPOTS = [
 const URLS: Record<string, string> = {
   arctrail: 'arctrail.ca/collaborations',
   'herschel-wander': 'herschel.com/wander',
+  'this-website': 'deliaazhang.github.io/portfolio',
 }
 
 /** a soft tap ripple that fires shortly before the screen changes */

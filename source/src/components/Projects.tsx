@@ -32,6 +32,7 @@ function ProjectCard({ project, i, onOpen }: { project: Project; i: number; onOp
 
   return (
     <motion.article
+      className="md:[&:last-child:nth-child(odd)]:col-span-2 md:[&:last-child:nth-child(odd)]:mx-auto md:[&:last-child:nth-child(odd)]:w-[calc(50%-1.25rem)] lg:[&:last-child:nth-child(odd)]:w-[calc(50%-2rem)]"
       initial={{ opacity: 0, y: 48 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}

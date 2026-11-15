@@ -4,7 +4,7 @@
  */
 export type Step = { title: string; points: string[] }
 
-export type PrototypeKey = 'arctrail' | 'roominate' | 'skintellect' | 'herschel' | 'wehappy' | 'vcl'
+export type PrototypeKey = 'arctrail' | 'roominate' | 'skintellect' | 'herschel' | 'wehappy' | 'vcl' | 'site'
 
 export type Project = {
   slug: string
@@ -33,7 +33,7 @@ export type Project = {
   process: { image: string; steps: Step[] }
   feature: { name: string; body: string; image?: string; chart?: 'stimuli' }
   /** separate pieces of work inside one project (shown as "the work") */
-  parts?: { title: string; kind: string; body: string; images: string[]; phones?: boolean }[]
+  parts?: { title: string; kind: string; body: string; images: string[]; phones?: boolean; labels?: string[] }[]
   gallery: { image: string; caption: string; tall?: boolean }[]
   links: { label: string; href: string }[]
 }
@@ -390,5 +390,93 @@ export const projects: Project[] = [
       { label: 'Figma prototype', href: 'https://www.figma.com/design/fNsWq7VVbIDX5bQEjgSqBs/HERschel?node-id=0-1&t=gBPr2cRxOPDEfnch-1' },
       { label: 'Slide deck', href: 'https://www.canva.com/design/DAGcyrOkzFY/3TbjAv8sd1Z24AiO1nmJIQ/view' },
     ],
+  },
+  {
+    slug: 'this-website',
+    tint: 'linear-gradient(160deg,#f3efe4 0%,#e3e9dc 55%,#cfdcc4 100%)',
+    preview: { device: 'laptop', screens: ['site/entrance.webp', 'site/hero.webp', 'site/gallery.webp', 'site/projects.webp', 'site/about.webp', 'site/pegboard.webp'] },
+    prototype: { key: 'site', title: 'from sketch to screen', hint: 'pick a part of the site, then drag to compare my sketch with what i built' },
+    title: 'This Website',
+    category: 'Web Design · Vibe Coding',
+    year: '2026',
+    event: 'Personal project · built with Claude Code + Lovable',
+    description: 'The portfolio you’re on: sketched by hand, then vibe coded with Claude Code and Lovable.',
+    overview:
+      'I wanted a portfolio that felt like me, not a template. I started with a hand-drawn wireframe and a brainstorm of things that make me, me, then vibe coded it with Claude Code and Lovable, iterating screen by screen until it matched what I had in my head.',
+    thumb: 'site/hero.webp',
+    hero: 'site/sketch-full.webp',
+    accent: '#5f7356',
+    facts: [
+      { label: 'built at', value: 'Personal project' },
+      { label: 'worked as', value: 'Designer & builder' },
+      { label: 'tools', value: 'Claude Code, Lovable' },
+      { label: 'learned', value: 'Vibe coding, React, GitHub Pages' },
+      { label: 'when', value: '2026' },
+    ],
+    challenge: 'How might I make a portfolio that feels personal and playful, while still showing my design and data work clearly?',
+    goals: [
+      'Make the first few seconds memorable and personal',
+      'Keep the projects easy to find and read',
+      'Show who I am beyond design and data',
+    ],
+    achieved: [
+      'A camera-and-matcha entrance that you click to step inside',
+      'A camera you can flip through for my photos and little memories',
+      'Case studies with moving previews and hands-on prototypes',
+      'An About page built around a pegboard of the things I love',
+    ],
+    process: {
+      image: '',
+      steps: [
+        { title: 'sketch', points: ['Drew the wireframe: entrance, hero, camera gallery, projects', 'Brainstormed words for the About page around a self-portrait'] },
+        { title: 'gather', points: ['Collected references for typography and feel', 'Picked photos, projects and posters to include'] },
+        { title: 'vibe code', points: ['Built the first version with Claude Code and Lovable', 'Described each screen in plain words, then refined it'] },
+        { title: 'iterate', points: ['Swapped words for a pegboard, tidied spacing, added previews', 'Published it on GitHub Pages'] },
+      ],
+    },
+    feature: {
+      name: 'Built by describing it',
+      body: 'Instead of coding every line by hand, I described what I wanted to Claude Code and Lovable, from the camera shutter to the pegboard, then reviewed each version and asked for changes until it felt right.',
+      image: 'site/gallery.webp',
+    },
+    gallery: [],
+    parts: [
+      {
+        title: 'Entrance',
+        kind: 'sketch → built',
+        body: 'A camera and a matcha on a desk, with “click to enter”. Clicking the camera now plays a shutter, a flash and an iris that opens into the site.',
+        images: ['site/sketch-entrance.webp', 'site/entrance.webp'],
+        labels: ['my sketch', 'built'],
+      },
+      {
+        title: 'Hero + camera',
+        kind: 'sketch → built',
+        body: 'Graph paper, “hi, i’m delia”, my Chinese name and a camera with a keychain, just like the sketch, plus a ticker of what I’m up to.',
+        images: ['site/sketch-hero.webp', 'site/hero.webp'],
+        labels: ['my sketch', 'built'],
+      },
+      {
+        title: 'Camera gallery',
+        kind: 'sketch → built',
+        body: '“Camera clickable, can click through my own images, each image has a message that pops up.” That note became the photo gallery inside the camera.',
+        images: ['site/sketch-camera.webp', 'site/gallery.webp'],
+        labels: ['my sketch', 'built'],
+      },
+      {
+        title: 'Projects',
+        kind: 'sketch → built',
+        body: 'Four boxes labelled “projects modern” turned into a clean grid where each card plays a short preview on hover.',
+        images: ['site/sketch-projects.webp', 'site/projects.webp'],
+        labels: ['my sketch', 'built'],
+      },
+      {
+        title: 'About me',
+        kind: 'sketch → rethought',
+        body: 'I started with a self-portrait surrounded by words. It felt too busy on screen, so it became a pegboard of the things I love instead.',
+        images: ['site/sketch-about.webp', 'site/pegboard.webp'],
+        labels: ['my sketch', 'built'],
+      },
+    ],
+    links: [{ label: 'View the code on GitHub', href: 'https://github.com/deliaazhang/portfolio' }],
   },
 ]

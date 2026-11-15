@@ -10,6 +10,7 @@ import { SkintellectFlow } from './prototypes/SkintellectFlow'
 import { HerschelExplorer } from './prototypes/HerschelExplorer'
 import { WeHappyCheckin } from './prototypes/WeHappyCheckin'
 import { CorrelationTask } from './prototypes/CorrelationTask'
+import { SketchCompare } from './prototypes/SketchCompare'
 import { OpacityStimuli } from './OpacityStimuli'
 
 const ease = [0.2, 0.7, 0.2, 1] as const
@@ -21,6 +22,7 @@ const PROTOTYPES: Record<PrototypeKey, () => ReactNode> = {
   herschel: () => <HerschelExplorer />,
   wehappy: () => <WeHappyCheckin />,
   vcl: () => <CorrelationTask />,
+  site: () => <SketchCompare />,
 }
 
 const SECTIONS = [
@@ -235,7 +237,7 @@ export function ProjectDetail({ slug, onBack, onOpen }: { slug: string; onBack: 
 
           {/* the work: separate pieces inside one project */}
           {p.parts && (
-            <Section id="work" label={`the work · ${p.parts.length} projects`} accent={p.accent}>
+            <Section id="work" label={p.parts.some((x) => x.labels) ? `sketch → site · ${p.parts.length} parts` : `the work · ${p.parts.length} projects`} accent={p.accent}>
               <ol className="space-y-14">
                 {p.parts.map((part, i) => (
                   <Reveal key={part.title}>
@@ -248,17 +250,24 @@ export function ProjectDetail({ slug, onBack, onOpen }: { slug: string; onBack: 
                         <p className="mt-3 text-[1rem] leading-relaxed text-ink-soft">{part.body}</p>
                       </div>
                       <div
-                        className={`rounded-[18px] p-4 sm:p-5 ${i % 2 ? 'md:order-1' : ''} ${part.phones ? 'grid grid-cols-3 gap-3' : 'grid gap-3'}`}
+                        className={`rounded-[18px] p-4 sm:p-5 ${i % 2 ? 'md:order-1' : ''} ${part.phones ? 'grid grid-cols-3 gap-3' : part.labels ? 'grid grid-cols-2 items-center gap-3' : 'grid gap-3'}`}
                         style={{ background: p.tint }}
                       >
-                        {part.images.map((src) => (
-                          <img
-                            key={src}
-                            src={src}
-                            alt={`${part.title} screen`}
-                            loading="lazy"
-                            className={`w-full shadow-[0_14px_24px_-14px_rgba(43,42,39,.45)] ${part.phones ? 'rounded-[14px]' : 'rounded-[10px]'}`}
-                          />
+                        {part.images.map((src, k) => (
+                          <figure key={src} className="m-0">
+                            <img
+                              src={src}
+                              alt={`${part.title} ${part.labels?.[k] ?? 'screen'}`}
+                              loading="lazy"
+                              className={`w-full shadow-[0_14px_24px_-14px_rgba(43,42,39,.45)] ${part.phones ? 'rounded-[14px]' : 'rounded-[10px]'} ${part.labels && k === 0 ? 'bg-white p-2' : ''}`}
+                            />
+                            {part.labels?.[k] && (
+                              <figcaption className="mt-1.5 text-center font-mono text-[0.62rem] uppercase tracking-[0.14em] text-ink-soft">
+                                {k > 0 ? '→ ' : ''}
+                                {part.labels[k]}
+                              </figcaption>
+                            )}
+                          </figure>
                         ))}
                       </div>
                     </li>

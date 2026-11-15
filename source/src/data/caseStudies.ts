@@ -27,6 +27,48 @@ export type Story = {
 }
 
 export const stories: Record<string, Story> = {
+  'this-website': {
+    tags: ['web design', 'vibe coding', 'Claude Code', 'Lovable'],
+    tldr: [
+      'This portfolio started as a pencil sketch: a camera and a matcha you click to enter, graph paper, a clickable camera full of photos, and a grid of projects.',
+      'I built it by vibe coding with Claude Code and Lovable: describing each part in plain words, reviewing what came back, and iterating until it felt like me.',
+    ],
+    origin: [
+      'Most portfolio templates looked the same, and none of them felt personal. I wanted visitors to feel like they were discovering a few of my favourite things.',
+      'So before touching any tools I sketched the whole flow on paper, and brainstormed words that describe me around a self-portrait.',
+    ],
+    questions: [
+      'How do I make the first few seconds feel personal?',
+      'How do I show personality without hiding the work?',
+      'Can I build something this custom without coding every line myself?',
+    ],
+    decisions: [
+      {
+        question: 'Template or from scratch?',
+        choice: 'From my own sketch.',
+        why: 'Starting from paper kept the ideas mine. The tools helped me build it, but the layout and the little details came from the sketch.',
+      },
+      {
+        question: 'How do people get in?',
+        choice: 'Click a camera to enter.',
+        why: 'Photography is a big part of who I am, so the camera became the doorway, with a shutter sound and an iris that opens into the site.',
+      },
+      {
+        question: 'Words or objects for the About page?',
+        choice: 'A pegboard of things I love.',
+        why: 'The word cloud around my portrait felt crowded on screen. Real objects like polaroids, photocards and a lightstick say more with less.',
+      },
+      {
+        question: 'How do I vibe code well?',
+        choice: 'One small change at a time, checked each time.',
+        why: 'Describing one thing, looking at the result, then refining kept the site from drifting away from my vision.',
+      },
+    ],
+    reflections: [
+      'Vibe coding still needs a clear design vision; the sketch did most of the deciding.',
+      'Small details, like a shutter sound or a swinging keychain, are what make it feel like mine.',
+    ],
+  },
   wehappy: {
     tags: ['product design', 'internship', 'community', 'web design'],
     tldr: [
