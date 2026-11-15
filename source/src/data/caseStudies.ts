@@ -31,7 +31,7 @@ export const stories: Record<string, Story> = {
     tags: ['web design', 'vibe coding', 'Claude Code', 'Lovable'],
     tldr: [
       'This portfolio started as a pencil sketch: a camera and a matcha you click to enter, graph paper, a clickable camera full of photos, and a grid of projects.',
-      'I built it by vibe coding with Claude Code and Lovable: describing each part in plain words, reviewing what came back, and iterating until it felt like me.',
+      'I fed those lo-fi wireframes into Lovable to get the design, then used Claude Code to host it on GitHub and push it to my website.',
     ],
     origin: [
       'Most portfolio templates looked the same, and none of them felt personal. I wanted visitors to feel like they were discovering a few of my favourite things.',
@@ -59,9 +59,9 @@ export const stories: Record<string, Story> = {
         why: 'The word cloud around my portrait felt crowded on screen. Real objects like polaroids, photocards and a lightstick say more with less.',
       },
       {
-        question: 'How do I vibe code well?',
-        choice: 'One small change at a time, checked each time.',
-        why: 'Describing one thing, looking at the result, then refining kept the site from drifting away from my vision.',
+        question: 'How do I go from design to a real website?',
+        choice: 'Lovable for the design, Claude Code for hosting.',
+        why: 'Lovable turned my wireframes into a design quickly. Claude Code then put it on GitHub and pushed it live, so every update reaches my website in minutes.',
       },
     ],
     reflections: [
